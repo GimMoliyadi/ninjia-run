@@ -1,0 +1,508 @@
+<title>水墨忍者代码地图</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;900&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f2ecd9;
+  --paper-2: #ece4cd;
+  --card: #f9f5e7;
+  --ink: #2b2b31;
+  --ink-soft: #55524a;
+  --ink-faint: #8b8677;
+  --line: rgba(43, 43, 49, 0.16);
+  --line-strong: rgba(43, 43, 49, 0.32);
+  --red: #a53a2e;
+  --red-deep: #8c2f25;
+  --gold: #d8a441;
+  --gold-text: #8a6a1e;
+  --seal-text: #f6f1de;
+  --shadow: rgba(43, 43, 49, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1c1b21;
+    --paper-2: #232229;
+    --card: #27262f;
+    --ink: #e9e4d4;
+    --ink-soft: #b3ad9d;
+    --ink-faint: #7c776a;
+    --line: rgba(233, 228, 212, 0.16);
+    --line-strong: rgba(233, 228, 212, 0.34);
+    --red: #d4614f;
+    --red-deep: #e07a68;
+    --gold: #d8a441;
+    --gold-text: #d8a441;
+    --seal-text: #211f26;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1c1b21;
+  --paper-2: #232229;
+  --card: #27262f;
+  --ink: #e9e4d4;
+  --ink-soft: #b3ad9d;
+  --ink-faint: #7c776a;
+  --line: rgba(233, 228, 212, 0.16);
+  --line-strong: rgba(233, 228, 212, 0.34);
+  --red: #d4614f;
+  --red-deep: #e07a68;
+  --gold: #d8a441;
+  --gold-text: #d8a441;
+  --seal-text: #211f26;
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1020px; margin: 0 auto; padding: 0 28px; }
+
+code, .mono {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.86em;
+}
+
+a { color: var(--red); }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* ---------- hero ---------- */
+.hero { padding: 84px 0 56px; }
+.eyebrow {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  letter-spacing: 0.04em;
+  margin: 14px 0 6px;
+  text-wrap: balance;
+}
+.stroke { display: block; width: 210px; height: 12px; color: var(--red); margin: 4px 0 22px; }
+.lede { max-width: 62ch; color: var(--ink-soft); font-size: 1.05rem; }
+.stats {
+  display: flex; gap: 0; margin-top: 34px;
+  font-variant-numeric: tabular-nums;
+}
+.stats > div { padding: 2px 26px; border-left: 2px solid var(--line-strong); }
+.stats > div:first-child { padding-left: 0; border-left: none; }
+.stat-n {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 900; font-size: 1.7rem; line-height: 1.2; color: var(--red-deep);
+}
+.stat-t { font-size: 13px; color: var(--ink-faint); }
+
+/* ---------- sections ---------- */
+section { padding: 58px 0 8px; }
+.sec-head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+.seal {
+  flex: none; width: 36px; height: 36px;
+  background: var(--red); color: var(--seal-text);
+  font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 19px;
+  display: grid; place-items: center;
+  border-radius: 5px; transform: rotate(-3deg);
+  box-shadow: 0 2px 0 var(--shadow);
+}
+.sec-head h2 {
+  font-family: "Noto Serif SC", serif; font-weight: 900;
+  font-size: 1.45rem; letter-spacing: 0.05em;
+}
+.sec-sub { color: var(--ink-faint); font-size: 14px; margin-bottom: 26px; }
+.prose { max-width: 66ch; color: var(--ink-soft); margin-bottom: 26px; }
+.prose strong { color: var(--ink); }
+
+/* ---------- pipeline ---------- */
+.pipeline {
+  display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr;
+  align-items: stretch; gap: 0;
+}
+.stage {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 10px; padding: 20px 22px;
+}
+.stage-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.stage-head h3 { font-size: 1.05rem; font-weight: 700; }
+.stage-head code { display: block; color: var(--gold-text); font-size: 12px; }
+.stage p { font-size: 14px; color: var(--ink-soft); }
+.pipe-arrow { position: relative; }
+.pipe-arrow::before {
+  content: ""; position: absolute; top: 50%; left: 50%;
+  width: 9px; height: 9px;
+  border-top: 2px solid var(--line-strong); border-right: 2px solid var(--line-strong);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* ---------- timeline ---------- */
+.timeline { list-style: none; border-left: 2px solid var(--line-strong); margin-left: 17px; }
+.timeline li {
+  position: relative; padding: 0 0 26px 30px;
+}
+.timeline li:last-child { padding-bottom: 4px; }
+.step-no {
+  position: absolute; left: -18px; top: 0;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--paper); border: 2px solid var(--red); color: var(--red);
+  font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 13px;
+  display: grid; place-items: center;
+  font-variant-numeric: tabular-nums;
+}
+.timeline h3 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.timeline h3 code { color: var(--gold-text); font-size: 12px; margin-left: 8px; }
+.timeline p { font-size: 14.5px; color: var(--ink-soft); max-width: 70ch; }
+
+/* ---------- file layers ---------- */
+.layer { margin-bottom: 40px; }
+.layer-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.layer-head .seal { width: 30px; height: 30px; font-size: 15px; align-self: center; }
+.layer-head h3 { font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 1.12rem; }
+.layer-head span { color: var(--ink-faint); font-size: 13.5px; }
+.cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 14px;
+}
+.fcard {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 9px; padding: 15px 17px 13px;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.fcard:hover { transform: translateY(-2px); box-shadow: 0 6px 18px var(--shadow); }
+.fcard-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+.fname { color: var(--red); font-weight: 600; font-size: 13.5px; }
+.loc { color: var(--ink-faint); font-size: 12px; font-variant-numeric: tabular-nums; }
+.fcard p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
+.chips { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 5px; }
+.chips code {
+  font-size: 11px; color: var(--ink-faint);
+  border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px;
+}
+
+/* ---------- concepts ---------- */
+.ccards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+.ccard {
+  background: var(--paper-2); border: 1px solid var(--line);
+  border-radius: 9px; padding: 18px 20px 15px;
+}
+.ccard h3 { font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 1.02rem; margin-bottom: 6px; }
+.ccard p { font-size: 13.5px; color: var(--ink-soft); }
+.lives { margin-top: 10px; font-size: 12.5px; color: var(--ink-faint); }
+.lives code { color: var(--gold-text); }
+
+/* ---------- symptoms ---------- */
+.symptoms { list-style: none; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.symptoms li {
+  display: grid; grid-template-columns: minmax(150px, 34%) 24px 1fr;
+  align-items: baseline; gap: 10px;
+  padding: 13px 20px; font-size: 14.5px;
+  background: var(--card);
+}
+.symptoms li + li { border-top: 1px solid var(--line); }
+.sympt { font-weight: 700; }
+.symarrow { color: var(--red); text-align: center; }
+.symptoms code { color: var(--red); }
+.symfix { color: var(--ink-soft); }
+.tipbox {
+  margin-top: 22px; border-left: 3px solid var(--gold);
+  background: var(--paper-2); border-radius: 0 9px 9px 0;
+  padding: 15px 20px; font-size: 14px; color: var(--ink-soft);
+  max-width: 76ch;
+}
+.tipbox strong { color: var(--ink); }
+
+/* ---------- footer ---------- */
+.next {
+  margin: 64px 0 0; padding: 30px 34px;
+  border: 1.5px solid var(--red); border-radius: 12px;
+  background: var(--card);
+}
+.next h2 { font-family: "Noto Serif SC", serif; font-weight: 900; font-size: 1.25rem; margin-bottom: 8px; }
+.next p { color: var(--ink-soft); font-size: 15px; max-width: 66ch; }
+footer {
+  margin-top: 56px; padding: 26px 0 44px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint); font-size: 13px;
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+  .hero { padding-top: 56px; }
+  .pipeline { grid-template-columns: 1fr; gap: 10px; }
+  .pipe-arrow { height: 26px; }
+  .pipe-arrow::before { transform: translate(-50%, -50%) rotate(135deg); }
+  .stats { flex-wrap: wrap; row-gap: 14px; }
+  .stats > div { padding: 2px 18px; }
+  .symptoms li { grid-template-columns: 1fr; gap: 2px; }
+  .symarrow { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fcard { transition: none; }
+  .fcard:hover { transform: none; }
+}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">ninja-run · vite + canvas 2d · 代码概念地图</p>
+  <h1>你的游戏，拆开看</h1>
+  <svg class="stroke" viewBox="0 0 210 12" aria-hidden="true"><path fill="currentColor" d="M2 8C38 2.5 74 9.8 112 6.2 148 2.8 186 3.4 208 6.6L208 8.4C176 10.8 138 11.6 98 10.2 62 9 28 9.4 2 9.4Z"/></svg>
+  <p class="lede">这张地图把 ninja-run 的全部源码按职责分成三层：谁负责记住世界、谁负责推演世界、谁负责画出世界。你不需要会写代码——<strong>看得懂分工，就能指得准方向、说得清需求</strong>。</p>
+  <div class="stats">
+    <div><div class="stat-n">20</div><div class="stat-t">个源码模块</div></div>
+    <div><div class="stat-n">2250</div><div class="stat-t">行代码</div></div>
+    <div><div class="stat-n">60</div><div class="stat-t">帧 · 每秒</div></div>
+    <div><div class="stat-n">30</div><div class="stat-t">项自动化测试</div></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head"><span class="seal">心</span><h2>先建立心智模型</h2></div>
+  <p class="sec-sub">一切从这里开始</p>
+  <p class="prose">游戏本质上是一台不知疲倦的机器：它每秒钟把<strong>同一套动作</strong>重复约 60 次——看看玩家按了什么键，算一遍所有东西的新位置，然后把整个世界重新画一遍。你在屏幕上看到的流畅奔跑，其实是 60 张静止画面在快速闪现。这套重复的动作就叫<strong>游戏循环</strong>，它是理解这份地图的钥匙：后面每一个文件，都在为循环里的某一步干活。</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="seal">环</span><h2>每一帧的三步流水线</h2></div>
+  <p class="sec-sub">读输入 → 算世界 → 画画面，每秒转 60 圈</p>
+  <div class="pipeline">
+    <div class="stage">
+      <div class="stage-head"><span class="seal">入</span><div><h3>读输入</h3><code>input.js</code></div></div>
+      <p>把"玩家此刻按了什么"翻译后记进全局账本：空格=跳，↓=滑铲或俯冲，K=忍术。它不决定后果，只负责记录。</p>
+    </div>
+    <div class="pipe-arrow" aria-hidden="true"></div>
+    <div class="stage">
+      <div class="stage-head"><span class="seal">算</span><div><h3>推演世界</h3><code>engine.js</code> 调度全家</div></div>
+      <p>按固定顺序叫醒物理、地形、生成器、粒子：忍者往前跑了多远、脚下有没有地面、前方该刷什么障碍、有没有撞上东西。</p>
+    </div>
+    <div class="pipe-arrow" aria-hidden="true"></div>
+    <div class="stage">
+      <div class="stage-head"><span class="seal">绘</span><div><h3>重画画面</h3><code>main.js</code> + <code>render/</code></div></div>
+      <p>把刚算好的世界从头到尾重画一遍，次序固定：远景 → 金币 → 障碍 → 忍者 → 特效 → 界面。画完立刻预约下一帧。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="seal">帧</span><h2>一帧的生命周期</h2></div>
+  <p class="sec-sub">跟着一次循环走完全程</p>
+  <ol class="timeline">
+    <li>
+      <span class="step-no">01</span>
+      <h3>浏览器召唤<code>main.js 的 loop()</code></h3>
+      <p>算出距离上一帧过去了多久（dt），上限锁死 33 毫秒——万一电脑卡了一下，世界也不会瞬间瞬移。</p>
+    </li>
+    <li>
+      <span class="step-no">02</span>
+      <h3>分诊<code>engine.js</code></h3>
+      <p>先看当前处于哪种局面：标题屏什么都不算；死亡状态只走慢动作和墨点特效；正常奔跑才继续往下。</p>
+    </li>
+    <li>
+      <span class="step-no">03</span>
+      <h3>推进世界<code>physics.js · player.js · generator.js · terrain.js</code></h3>
+      <p>速度按里程阶梯爬升（1 万米内从 360 涨到 800），重力拉人下落；生成器在前方布置新障碍；地形随时回答"这个位置有没有地面"。</p>
+    </li>
+    <li>
+      <span class="step-no">04</span>
+      <h3>判碰撞<code>physics.js</code></h3>
+      <p>用一个看不见的矩形盒子罩住忍者，逐个检查障碍和金币：撞了掉血并弹开、吃了加分、掉进深坑直接宣告死亡。</p>
+    </li>
+    <li>
+      <span class="step-no">05</span>
+      <h3>记账清理<code>engine.js</code></h3>
+      <p>各类计时器倒数、血量自然回复、分数和里程结算——全是数字活，但手感的好坏一半藏在这里。</p>
+    </li>
+    <li>
+      <span class="step-no">06</span>
+      <h3>重画世界<code>render/ 目录六件套</code></h3>
+      <p>背景、金币、障碍、忍术、角色、界面依次叠上画布。画完，回到第 01 步，周而复始。</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <div class="sec-head"><span class="seal">层</span><h2>三层分工 · 文件地图</h2></div>
+  <p class="sec-sub">角标是代码行数，小标签是文件里最重要的几个"名字"</p>
+
+  <div class="layer">
+    <div class="layer-head"><span class="seal">枢</span><h3>中枢层</h3><span>游戏的记忆和宪法——数据放在哪、规矩定成几，都在这层</span></div>
+    <div class="cards">
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">state.js</code><span class="loc">67 行</span></div>
+        <p>全局唯一的大账本 G。20 个文件读写的是同一个对象，任何人改一笔，全游戏立刻知道。另含四种局面的开关：标题、奔跑、暂停、死亡。</p>
+        <div class="chips"><code>G</code><code>ST</code><code>ctx</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">constants.js</code><span class="loc">128 行</span></div>
+        <p>全部"手感数字"的家：重力多大、跳多高、各障碍扣多少血、飞镖潮的间距节奏……想调难度只动这一个文件，一行都不用碰逻辑。</p>
+        <div class="chips"><code>GRAV</code><code>JUMP_V</code><code>HP_MAX</code><code>DART_*</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">main.js</code><span class="loc">50 行</span></div>
+        <p>启动器和放映员：定义循环函数并向浏览器预约下一帧，同时规定画面的叠加次序。角色绘制出错也不会拖垮整帧。</p>
+        <div class="chips"><code>loop()</code><code>requestAnimationFrame</code></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-head"><span class="seal">理</span><h3>逻辑层</h3><span>世界的物理法则、关卡导演和动作裁判——数字在这层流动</span></div>
+    <div class="cards">
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">engine.js</code><span class="loc">49 行</span></div>
+        <p>每帧的总调度：按固定顺序点名上面流水线里的所有模块。自己几乎不算数，只保证次序不出错。</p>
+        <div class="chips"><code>update(dt)</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">physics.js</code><span class="loc">216 行</span></div>
+        <p>物理法则大全：速度阶梯、重力、滑铲加速曲线、碰撞判定、得分公式。游戏"跟不跟手"，八成取决于这里的曲线。</p>
+        <div class="chips"><code>speedAt</code><code>updateCollisions</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">player.js</code><span class="loc">145 行</span></div>
+        <p>动作规则书：二段跳、土狼时间、空中俯冲、滑铲接跳的冲刺继承、忍术释放条件。每个动作"什么时候允许发生"由它裁决。</p>
+        <div class="chips"><code>doJump</code><code>startSlide</code><code>castNinjutsu</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">terrain.js</code><span class="loc">46 行</span></div>
+        <p>造路工兼问答机：开局先铺 50 米纯平地，之后以 42% 概率随机布深坑；查询用二分查找，两百万像素的路也能一步定位。</p>
+        <div class="chips"><code>initTerrain</code><code>segAt</code><code>groundYAt</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">generator.js</code><span class="loc">243 行</span></div>
+        <p>关卡导演。EVENT_TPL 是一张预排的节目单（金币段 → 跳跃 → 奖励 → 忍者 → 飞镖潮…），循环播放、随机变奏，还用几何计算保证每种障碍永远躲得开。</p>
+        <div class="chips"><code>EVENT_TPL</code><code>dart_wave</code><code>waveHigh</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">input.js</code><span class="loc">52 行</span></div>
+        <p>键盘翻译官：把按键事件翻译成意图记进账本。F7 开调试、P 暂停、R 重开也归它管；长按不连跳的防抖也在这处理。</p>
+        <div class="chips"><code>keydown</code><code>F7</code><code>R 重开</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">ninjutsu.js</code><span class="loc">21 行</span></div>
+        <p>忍术冲击波的前进与扫清障碍——释放的判定在 player，飞行的过程在这。</p>
+        <div class="chips"><code>updateNinjutsu</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">particles.js</code><span class="loc">71 行</span></div>
+        <p>墨点特效的发生与消散：落地扬尘、受击溅墨、死亡爆墨都从这里喷出，寿命到了自动回收。</p>
+        <div class="chips"><code>burst</code><code>inkBurst</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">sprite.js</code><span class="loc">163 行</span></div>
+        <p>贴图管家：加载忍者精灵图，加载失败自动换一套备用简笔画兜底，保证游戏永远能玩。</p>
+        <div class="chips"><code>ninja-sprite.png</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">decor.js + utils.js</code><span class="loc">22 + 12 行</span></div>
+        <p>decor 备好远山、竹林、云朵这些背景装饰的数据；utils 是四个数学小工具——随机数，以及两种形状（矩形对矩形、圆对矩形）的重叠判定。</p>
+        <div class="chips"><code>aabb</code><code>circleRect</code><code>rand</code></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-head"><span class="seal">形</span><h3>表现层</h3><span>render/ 目录——把抽象数字变成宣纸上的像素</span></div>
+    <div class="cards">
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">render/entities.js</code><span class="loc">490 行</span></div>
+        <p>全项目最大的一份：金币、尖刺、石柱、剑忍、飞镖、忍者的具体长相全在这画。四刃飞镖的旋转、忍者的奔跑动画都在此逐帧驱动。</p>
+        <div class="chips"><code>drawPlayer</code><code>drawObstacles</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">render/background.js</code><span class="loc">195 行</span></div>
+        <p>宣纸底色、远山、竹林、流云，带视差滚动——越远的东西移动越慢，画面因此有了纵深。</p>
+        <div class="chips"><code>drawBackground</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">render/hud.js</code><span class="loc">169 行</span></div>
+        <p>界面排版：分数、连击、能量条、受伤才亮起的血条，以及标题、暂停、死亡三块整屏界面。</p>
+        <div class="chips"><code>drawHUD</code><code>drawTitle</code><code>drawDead</code></div>
+      </article>
+      <article class="fcard">
+        <div class="fcard-top"><code class="fname">render/ninjutsu.js + text.js + debug.js</code><span class="loc">43+35+33 行</span></div>
+        <p>忍术的墨圈视觉；毛笔字风格的文字工具；以及按 F7 才出现的调试层——把看不见的碰撞盒直接画给你看。</p>
+        <div class="chips"><code>drawDebug</code></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="seal">念</span><h2>六个值得认识的概念</h2></div>
+  <p class="sec-sub">每个概念都长在你自己的代码里——学会一个，需求就说得准一分</p>
+  <div class="ccards">
+    <article class="ccard">
+      <h3>游戏循环</h3>
+      <p>游戏不是"出了事才动"，而是每帧主动推演整个世界。你提的任何新点子，最终都会变成循环里的某一步。</p>
+      <p class="lives">住在 <code>main.js</code> 的 loop()</p>
+    </article>
+    <article class="ccard">
+      <h3>全局状态单例</h3>
+      <p>20 个文件之所以能配合，靠的是共用同一本账。排查任何诡异现象，第一步都是翻开账本看哪个数字不对劲。</p>
+      <p class="lives">住在 <code>state.js</code> 的 G</p>
+    </article>
+    <article class="ccard">
+      <h3>AABB 碰撞检测</h3>
+      <p>两个矩形在横向和纵向都有重叠，才算撞上。忍者的盒子站着高、滑铲时变矮——这就是"滑铲能钻过飞镖"的全部秘密。</p>
+      <p class="lives">住在 <code>utils.js</code> 的 aabb</p>
+    </article>
+    <article class="ccard">
+      <h3>程序化生成</h3>
+      <p>关卡不是手工画的地图，是"规则 + 随机数"现场编出来的：模板定骨架，随机填血肉。所以每局都不同，却又永远通得过去。</p>
+      <p class="lives">住在 <code>generator.js</code> 的 EVENT_TPL</p>
+    </article>
+    <article class="ccard">
+      <h3>宽容设计</h3>
+      <p>离地 0.15 秒内仍许起跳（土狼时间），落地前 0.12 秒按跳自动补发（输入缓冲）。好手感的真相是——<strong>故意放水</strong>，而且玩家完全察觉不到。</p>
+      <p class="lives">住在 <code>constants.js</code> 的 COYOTE_T / JUMP_BUFFER</p>
+    </article>
+    <article class="ccard">
+      <h3>缓动</h3>
+      <p>位移不用匀速直线，而是起步慢、收尾快。公式 p²(3−2p) 让滑铲前移像被墨吸出去一样顺滑，而不是生硬瞬移。</p>
+      <p class="lives">住在 <code>physics.js</code> 的 slideEase</p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="seal">医</span><h2>出了问题，先去哪间房</h2></div>
+  <p class="sec-sub">排障指南——说清症状，就能指对方向</p>
+  <ul class="symptoms">
+    <li><span class="symp">角色悬空、穿地、踩坑判定怪</span><span class="symarrow">→</span><span class="symfix">先看 <code>terrain.js</code> 的地面查询，再查账本里 <code>player.y</code> 的值</span></li>
+    <li><span class="symp">障碍该出现却没出现、间隔不对</span><span class="symarrow">→</span><span class="symfix"><code>generator.js</code> 的生成指针 <code>nextSpawnX</code> 和节目单 <code>EVENT_TPL</code></span></li>
+    <li><span class="symp">手感不对：跳太高、太飘、滑铲太快</span><span class="symarrow">→</span><span class="symfix">九成在 <code>constants.js</code>——改数字就行，别碰物理代码</span></li>
+    <li><span class="symp">按键没反应、误触发</span><span class="symarrow">→</span><span class="symfix"><code>input.js</code> 的分支顺序，以及当时处于哪种局面 <code>G.state</code></span></li>
+    <li><span class="symp">画面闪烁、遮挡次序错乱</span><span class="symarrow">→</span><span class="symfix"><code>render/</code> 对应文件 + <code>main.js</code> 里的绘制先后次序</span></li>
+    <li><span class="symp">数值失衡：伤害太疼、回血太慢</span><span class="symarrow">→</span><span class="symfix"><code>constants.js</code> 的 <code>DMG_*</code> 与 <code>HP_*</code> 一族</span></li>
+  </ul>
+  <aside class="tipbox">
+    <strong>随身三件套：</strong>浏览器里按 F12 打开控制台，输入 <code>window.G</code> 可直接翻阅那本大账本；游戏里按 <code>F7</code> 叠加调试视图，碰撞盒现形；<code>tests/</code> 目录下 3 个套件共 30 项自动化测试，是每次改动后的安全网。
+  </aside>
+</section>
+
+<div class="next">
+  <h2>下一步：把地图变成对话</h2>
+  <p>下次继续开发时，从本页挑一个概念，用自己的话向我复述——复述对了，这一课就算通过；说不清的地方正好是我们下一刀该切的位置。之后每完成一次功能，我都会照这个规矩补一课。</p>
+</div>
+
+<footer>
+  <span>ninja-run 代码概念地图 · 依据实际源码统计生成</span>
+  <span>2026 年 8 月 · 共 20 模块 / 2250 行</span>
+</footer>
+
+</div>
