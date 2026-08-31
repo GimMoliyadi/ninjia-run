@@ -10,6 +10,7 @@ import {
   DART_WAVE_MIN, DART_WAVE_MAX, DART_GAP_T_MIN, DART_GAP_T_MAX,
   DART_FIRST_LEAD, DART_PIT_LAND_GAP, DART_WAVE_TAIL_GAP,
   DART_PATTERN_MIX, DART_PATTERN_MIX_M, DART_PATTERN_HARD_M,
+  BOULDER_W, BOULDER_H, BOULDER_SPEED,
 } from './constants.js';
 import { segAt, segTypeAt } from './terrain.js';
 import { speedAt } from './physics.js';
@@ -22,6 +23,7 @@ const EVENT_TPL = [
   'jump1', 'reward_arc',
   'jump1', 'reward_arc',
   'jump2', 'reward_arc',
+  'spike_row', 'reward_arc',
 
   'coins_flat',
   'slide', 'reward_low',
@@ -31,9 +33,11 @@ const EVENT_TPL = [
   'coins_flat',
   'ninja', 'reward_dash',
   'dart_wave',        // 飞镖潮独占区段：整波一次生成，高低轨随机混合，潮前潮后有平静段
+  'boulder',          // 滚石：贴地迎面滚来的单体动态障碍
   'coins_flat',
   'ninja', 'reward_dash',
   'dart_wave',
+  'boulder',
   'coins_flat',
 
   'pillar', 'reward_arc',
@@ -159,6 +163,16 @@ export function makeEvent(x) {
       } else coinsLow(x);
       break;
     }
+    case 'spike_row': {   // 地刺阵：3-4 根连续尖刺，逐一跳跃越过
+      const S = OBSTACLES.spike;
+      const n = rint(3, 4), gap = 150;
+      if (flatFrom(x, n * gap + 60)) {
+        for (let i = 0; i < n; i++) {
+          addObstacle({ kind: 'spike', x: x + i * gap, y: gy - S.yOff, w: S.w, h: S.h, dmg: S.dmg });
+        }
+      } else coinsLow(x);
+      break;
+    }
     case 'pillar': {  // 石柱：跳跃越过
       const P = OBSTACLES.pillar;
       if (flatFrom(x, 300)) {
@@ -203,6 +217,14 @@ export function makeEvent(x) {
         for (const ob of wave) addObstacle(ob);
         // 波尾隔离：把全局生成游标推到波尾之后，静态障碍不会插进飞镖潮的到达时间窗
         G.nextSpawnX = Math.max(G.nextSpawnX, cursor + DART_WAVE_TAIL_GAP);
+      } else coinsLow(x);
+      break;
+    }
+    case 'boulder': {   // 滚石：贴地迎面滚来的单体动态障碍，跳跃越过
+      if (flatFrom(x, 320)) {
+        const lead = x + BOULDER_SPEED * REACT_T + 120;  // 首石预警距离：反应时间窗 + 余量
+        addObstacle({ kind: 'boulder', x: lead, y: gy - BOULDER_H, w: BOULDER_W, h: BOULDER_H, dmg: DMG_SPIKE });
+        G.nextSpawnX = Math.max(G.nextSpawnX, lead + 120);
       } else coinsLow(x);
       break;
     }

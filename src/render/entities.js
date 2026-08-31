@@ -1,8 +1,8 @@
 import { G, ctx } from '../state.js';
 import {
-  INK, RED, GOLD, PW, W, PLAYER_X, SHIELD_WARN_T,
+  INK, RED, GOLD, PW, PLAYER_X, SHIELD_WARN_T,
   COLLECT_RADIUS_EXTRA, DART_APPROACH_RANGE,
-  START_SPEED, RUN_CYCLE_FPS, RUN_STRIDE_MIN, RUN_STRIDE_MAX,
+  START_SPEED, RUN_CYCLE_FPS, RUN_STRIDE_MIN, RUN_STRIDE_MAX, RUN_LEAN_RAD,
 } from '../constants.js';
 
 const RUN_POSES = [
@@ -14,13 +14,13 @@ const RUN_POSES = [
   { leg: -0.45, arm: 0.45, bob: 0.5 },
 ];
 
-// 步频随场景速度缩放：极速时步频最高提到 RUN_STRIDE_MAX 倍
+// 步幅幅度随场景速度缩放（频率固定）：极速时腿跨得更开、抬膝更高，但摆动节奏不变
 function strideScale() {
   return Math.min(RUN_STRIDE_MAX, Math.max(RUN_STRIDE_MIN, G.speed / START_SPEED));
 }
 
 function runPoseAt(frameT) {
-  const progress = frameT * RUN_CYCLE_FPS * strideScale();
+  const progress = frameT * RUN_CYCLE_FPS;
   const from = RUN_POSES[Math.floor(progress) % RUN_POSES.length];
   const to = RUN_POSES[(Math.floor(progress) + 1) % RUN_POSES.length];
   const t = progress - Math.floor(progress);
@@ -49,20 +49,22 @@ function drawRunPose(frameT) {
   const pose = runPoseAt(frameT);
   const leg = pose.leg;
   const arm = pose.arm;
-  // 步幅随速度放大：腿的横向蹬伸、抬膝高度都乘同一比例，大步流星
+  // 冲刺姿态：高抬膝、后蹬伸直、屈肘大幅摆臂；步幅随速度放大
   const s = strideScale();
-  const frontKneeY = -15 - Math.max(0, leg) * 8 * s;
-  const rearKneeY = -15 - Math.max(0, -leg) * 8 * s;
+  const frontKneeY = -15 - Math.max(0, leg) * 16 * s;
+  const rearKneeY = -15 - Math.max(0, -leg) * 16 * s;
   ctx.strokeStyle = INK;
   ctx.lineWidth = 3.5;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   head(0, -53);
   limb(0, -45, 0, -35, 0, -26);
-  limb(-2, -27, 4 + leg * 12 * s, frontKneeY, 8 + leg * 19 * s, -2);
-  limb(2, -27, -4 - leg * 12 * s, rearKneeY, -8 - leg * 19 * s, -2);
-  limb(-2, -42, -5 - arm * 7 * s, -32, -11 - arm * 12 * s, -24);
-  limb(2, -42, 5 + arm * 7 * s, -32, 11 + arm * 12 * s, -24);
+  limb(-2, -27, 4 + leg * 14 * s, frontKneeY, 8 + leg * 30 * s, -2);
+  limb(2, -27, -4 - leg * 14 * s, rearKneeY, -8 - leg * 30 * s, -2);
+  // 屈肘摆臂：肘部贴身前后摆，前臂恒向上折叠，拳到胸高
+  const elbowX = 12 * s, fistX = 6 * s, fistY = -10 * s;
+  limb(-2, -42, -2 + arm * elbowX, -34, -2 + arm * elbowX + fistX, -34 + fistY);
+  limb(2, -42, 2 - arm * elbowX, -34, 2 - arm * elbowX + fistX, -34 + fistY);
   ctx.strokeStyle = RED;
   ctx.lineWidth = 2.5;
   ctx.beginPath();
@@ -166,6 +168,7 @@ function drawPlayerNinja(x, y) {
   } else {
     const pose = runPoseAt(p.runT);
     ctx.translate(x, y - pose.bob);
+    ctx.rotate(RUN_LEAN_RAD);   // 冲刺躯干前倾，绕脚底旋转保持脚贴地
     drawRunPose(p.runT);
   }
   ctx.restore();
@@ -328,6 +331,7 @@ export function drawObstacles() {
     else if (ob.kind === 'beam') drawBeam(ob, x, y);
     else if (ob.kind === 'ninja') drawNinja(ob, x);
     else if (ob.kind === 'dart') drawDart(ob, x);
+    else if (ob.kind === 'boulder') drawBoulder(ob, x);
     // 调试：显示障碍碰撞盒（F7 切换）
     if (G.debugMode) {
       ctx.strokeStyle = 'rgba(200,40,40,0.9)';
@@ -336,6 +340,56 @@ export function drawObstacles() {
     }
     ctx.restore();
   }
+}
+
+// 滚石：贴地迎面滚来的大圆石。墨晕团身 + 两道旋转墨纹表达滚动，
+// 随滚动带起贴地尘粒，迎面靠近时是明确的"跳过去"信号。
+function drawBoulder(ob, x) {
+  const gy = ob.y + ob.h;
+  const r = ob.w / 2 + 2;
+  const cx = x + ob.w / 2, cy = gy - r;
+  const rot = G.gameTime * 6;
+  ctx.save();
+  // 淡影
+  ctx.globalAlpha = 0.15;
+  ctx.fillStyle = INK;
+  ctx.beginPath();
+  ctx.ellipse(cx, gy - 1, r * 0.92, r * 0.32, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+  // 团身（略压扁的圆，带不规则边缘模拟石头）
+  ctx.fillStyle = 'rgba(36,36,43,0.96)';
+  ctx.beginPath();
+  ctx.moveTo(cx - r, cy);
+  ctx.quadraticCurveTo(cx - r * 0.9, cy - r * 1.15, cx, cy - r * 1.05);
+  ctx.quadraticCurveTo(cx + r * 0.95, cy - r * 1.15, cx + r, cy);
+  ctx.quadraticCurveTo(cx + r * 0.9, cy + r * 0.92, cx, cy + r);
+  ctx.quadraticCurveTo(cx - r * 0.92, cy + r * 0.95, cx - r, cy);
+  ctx.closePath();
+  ctx.fill();
+  // 旋转墨纹（表现滚动）
+  ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+  ctx.lineWidth = 3;
+  for (let i = 0; i < 2; i++) {
+    const a0 = rot + i * Math.PI;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 0.72, a0, a0 + 1.6);
+    ctx.stroke();
+  }
+  ctx.restore();
+  // 贴地滚动尘粒
+  ctx.save();
+  ctx.globalAlpha = 0.3;
+  ctx.fillStyle = INK;
+  for (let i = 0; i < 3; i++) {
+    const dx = -((G.gameTime * 90 + i * 23) % 40);
+    const dy = -((G.gameTime * 130 + i * 31) % 26);
+    ctx.beginPath();
+    ctx.arc(cx - r + dx * 0.4, gy - 2 - dy * 0.3, 2.5 - i * 0.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+  groundMark(x, gy, ob.w);
 }
 
 // ================= 活体障碍 =================

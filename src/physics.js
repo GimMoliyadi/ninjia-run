@@ -7,7 +7,7 @@ import {
   CLEAR_SCORE, CLEAN_MARGIN,
   COLLECT_RADIUS_EXTRA, PW, PLAYER_X, W,
   HIT_INVULN_T, HIT_KNOCK_PX,
-  DART_SPEED,
+  DART_SPEED, BOULDER_SPEED,
 } from './constants.js';
 import { groundYAt, segTypeAt } from './terrain.js';
 import { burst, inkBurst } from './particles.js';
@@ -89,10 +89,11 @@ export function updateSpeed(dt) {
   }
 }
 
-// 活体障碍每帧推进：飞镖迎面朝玩家水平飞（世界坐标 x 递减），碰撞盒与渲染共用当前位置。
+// 活体障碍每帧推进：飞镖与滚石迎面朝玩家水平飞（世界坐标 x 递减），碰撞盒与渲染共用当前位置。
 export function updateEnemies(dt) {
   for (const ob of G.obstacles) {
     if (ob.kind === 'dart') ob.x -= DART_SPEED * dt;
+    else if (ob.kind === 'boulder') ob.x -= BOULDER_SPEED * dt;
   }
 }
 

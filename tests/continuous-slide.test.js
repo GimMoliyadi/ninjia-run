@@ -225,12 +225,12 @@ test('the opening route keeps each obstacle family in its own section', () => {
   G.collectibles = [];
   G.tplIdx = 0;
 
-  for (let i = 0; i < 26; i++) {
+  for (let i = 0; i < 30; i++) {
     makeEvent(2000 + i * 900);
     if (!G.lastEventKind.startsWith('reward') && G.lastEventKind !== 'coins_flat') kinds.push(G.lastEventKind);
   }
 
-  assert.deepEqual(kinds, ['jump1', 'jump1', 'jump2', 'slide', 'slide', 'slide', 'ninja', 'dart_wave', 'ninja', 'dart_wave', 'pillar', 'pillar']);
+  assert.deepEqual(kinds, ['jump1', 'jump1', 'jump2', 'spike_row', 'slide', 'slide', 'slide', 'ninja', 'dart_wave', 'boulder', 'ninja', 'dart_wave', 'boulder', 'pillar', 'pillar']);
 });
 
 test('ninjutsu wave destroys only obstacles it reaches', () => {

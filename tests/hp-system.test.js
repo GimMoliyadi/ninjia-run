@@ -69,14 +69,15 @@ test('hit invincibility blocks further damage for the window', () => {
 
 test('after invincibility expires the same hazard damages again', () => {
   fresh();
-  G.obstacles = [ninjaOb()];
+  // 用轻伤（飞镖）连撞两次：验证无敌期过后再次掉血，同时不被两次轻伤打死（HP_MAX 减半后忍者的两刀会致死）
+  G.obstacles = [{ kind: 'dart', x: 200, y: GROUND - DART_HIGH_LIFT, w: DART_W, h: DART_H, dmg: DMG_DART }];
   updateCollisions(boxOf(G.obstacles[0]));
 
   G.player.invuln = 0;
   const res = updateCollisions(boxOf(G.obstacles[0]));
 
   assert.equal(res, false);
-  assert.equal(G.player.hp, HP_MAX - 2 * DMG_NINJA);
+  assert.equal(G.player.hp, HP_MAX - 2 * DMG_DART);
 });
 
 test('pillar and spike deal their own damage values', () => {
@@ -104,11 +105,11 @@ test('HP reaching zero ends the run', () => {
 
 test('HP regenerates over time and caps at the maximum', () => {
   fresh();
-  G.player.hp = 70;
+  G.player.hp = HP_MAX - 30;
   update(0.5);
-  assert.equal(G.player.hp, 70 + HP_REGEN * 0.5);
+  assert.equal(G.player.hp, HP_MAX - 30 + HP_REGEN * 0.5);
 
-  G.player.hp = HP_MAX - 1;
+  G.player.hp = HP_MAX - HP_REGEN * 0.5;
   update(0.5);
   assert.equal(G.player.hp, HP_MAX);
 });
@@ -204,7 +205,7 @@ test('the jump2 template spawns both spikes with damage', () => {
 
 test('the ninja template spawns a ninja with its damage', () => {
   fresh();
-  G.tplIdx = 15; // ninja
+  G.tplIdx = 17; // ninja
 
   makeEvent(3000);
 

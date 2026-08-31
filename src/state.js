@@ -20,6 +20,10 @@ export const G = {
   // 本帧是否被竖板墙顶住（用于站位恢复）
   wallPushed: false,
 
+  // 场景区域
+  zone: 'bamboo',
+  zoneTransitionT: 0,   // 区域切换泼墨过渡剩余时间 s
+
   // 玩家状态
   player: {
     x: 0, y: 0, vy: 0,
@@ -39,6 +43,8 @@ export const G = {
 
   // 远处装饰
   bamboos: [], mountains: [], clouds: [],
+  // 区专属装饰：村町灯笼 / 冥山枯树与鬼火
+  lamps: [], deadTrees: [], ghostFires: [],
 
   // 地形
   terrain: [],

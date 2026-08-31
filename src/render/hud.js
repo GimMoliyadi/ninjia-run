@@ -1,8 +1,19 @@
 import { G, ctx } from '../state.js';
-import { W, H, KAI, INK, RED, ENERGY_MAX, HP_MAX, BG, SLIDE_H, STAND_H } from '../constants.js';
+import { W, H, KAI, INK, RED, ENERGY_MAX, HP_MAX, BG, SLIDE_H, STAND_H, ZONE_TRANSITION_T } from '../constants.js';
 import { brushText, stamp } from './text.js';
+import { zoneName } from '../zone.js';
 
 export function drawHUD() {
+  // 区域切换横幅：切换瞬间泼墨过后，区域名居中渐显渐隐
+  if (G.zoneTransitionT > 0) {
+    const t = G.zoneTransitionT / ZONE_TRANSITION_T;          // 1 → 0
+    const a = Math.sin(Math.min(1, (1 - t) * 2.2) * Math.PI); // 淡入淡出
+    ctx.save();
+    ctx.globalAlpha = a * 0.9;
+    brushText('——  ' + zoneName(G.zone) + '  ——', W / 2, 148, 34, INK);
+    ctx.restore();
+  }
+
   // 血条：受伤才显示（hpBarT 0~1），悬浮在角色头顶的墨水横条 + 数值，中心随角色（含滑铲前移）移动。
   // 低于 30% 变红警示，受击闪烁（无敌期间高亮）。
   const p = G.player;

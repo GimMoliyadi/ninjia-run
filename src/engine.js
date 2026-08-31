@@ -4,6 +4,7 @@ import { updateSpeed, updateGravity, updateEnemies, updateCollisions, collectPic
 import { spawnLoop } from './generator.js';
 import { updateParticles } from './particles.js';
 import { updateNinjutsu } from './ninjutsu.js';
+import { updateZone } from './zone.js';
 
 export function update(dt) {
   if (G.state === ST.TITLE) return;
@@ -15,6 +16,9 @@ export function update(dt) {
 
   G.gameTime += dt;
   updateSpeed(dt);
+
+  updateZone();
+  if (G.zoneTransitionT > 0) G.zoneTransitionT = Math.max(0, G.zoneTransitionT - dt);
 
   // 土狼时间 / 跳跃缓冲衰减
   G.jumpBuf = Math.max(0, G.jumpBuf - dt);

@@ -20,8 +20,9 @@ export const DASH_JUMP_SHIFT_MAX = 160; // 滑铲接跳的总前移上限（助�
 export const DASH_RETURN_SPEED = 160; // 回位速度：慢于基础跑速，落地后自然滑回原位
 export const AIR_CANCEL_V = 560;      // 空中打断起跳后的下落初速
 export const RUN_CYCLE_FPS = 12;      // 基础跑步循环速率：runT × 此值推进 RUN_POSES
-export const RUN_STRIDE_MIN = 0.75;   // 步频缩放下限：慢速时动作不至于拖沓
-export const RUN_STRIDE_MAX = 2.1;    // 步频缩放上限：极速时腿不糊成残影
+export const RUN_STRIDE_MIN = 0.75;   // 步幅幅度缩放下限：慢速时步伐不至于僵直
+export const RUN_STRIDE_MAX = 2.1;    // 步幅幅度缩放上限：极速时腿跨得最开
+export const RUN_LEAN_RAD = 0.21;     // 冲刺躯干前倾角（弧度，约 12°），绕脚底旋转
 export const COYOTE_T = 0.15;         // 土狼时间：离地后仍可跳跃
 export const JUMP_BUFFER = 0.12;      // 跳跃缓冲：落地前按键自动起跳
 export const PW = 46;                 // 角色宽
@@ -51,8 +52,8 @@ export const CLEAR_SCORE = 50;         // 每清一个障碍的分
 // ---- 血量 / 伤害 ----
 // 基础机制从"一触即死"改为血条：普通障碍撞一次扣一格数值血，血条每帧自然恢复；
 // 仅存一类即死机关（无视血条与护盾）：深坑坠落；其余障碍一律按血条硬扛 + 位移反馈。
-export const HP_MAX = 100;          // 血条上限
-export const HP_REGEN = 2;          // 每秒自然回血：约 50 秒从空回满，挨一刀十几秒才缓过来，惩罚够重
+export const HP_MAX = 50;           // 血条上限：轻伤（尖刺/飞镖）连续约 5 次见底，惩罚够重
+export const HP_REGEN = 1;          // 每秒自然回血：满血恢复约 50 秒，与减半血量同节奏
 export const HP_BAR_FADE = 2.0;     // 血回满后血条淡出时长：受伤才见血条，回满不常驻遮挡
 export const HIT_INVULN_T = 1.0;    // 受击后无敌时长：防止连续碰撞瞬间清空血条
 export const HIT_KNOCK_PX = 44;     // 受击后撤距离：撞上障碍往画面左（身后）弹开，随后平滑回到原位
@@ -66,6 +67,11 @@ export const DMG_DART = DMG_SPIKE;  // 飞镖擦伤：与尖刺同级轻伤
 // 持刀忍者：贴地近战敌人，无远程、无预警——纯近身威胁，碰到砍一刀扣 DMG_NINJA。
 // 刀身带呼吸式反光闪动作为危险提示，让"活物"感与静态障碍区分。
 export const NINJA_W = 26, NINJA_H = 58;     // 忍者碰撞盒（贴地）
+
+// ---- 滚石（迎面动态障碍） ----
+// 滚石：贴地迎面滚来的大圆石，跳跃越过；撞上扣尖刺级轻伤。
+export const BOULDER_W = 40, BOULDER_H = 40; // 滚石碰撞盒（方形贴地）
+export const BOULDER_SPEED = 300;            // 迎面滚动速度：恒定不随场景速度变，保肌肉记忆
 
 // ---- 飞镖潮（迎面动态障碍） ----
 // 飞镖迎面朝玩家水平飞（世界坐标 x 递减），撞上按 DMG_SPIKE 扣血（普通伤害，护盾可挡、忍术可清）。
@@ -114,6 +120,11 @@ export const COLLECT_RADIUS_EXTRA = 4; // 收集判定比贴图半径多出
 // ---- 计分 / 距离 ----
 export const SCORE_PER_PX = 10;        // 每前进 10px 得 1 分
 export const PX_PER_M = 100;           // 每 100px 计 1 米
+
+// ---- 场景区域（Zone） ----
+export const ZONE_VILLAGE_AT = 3000;   // 到达此米数切入"黄昏村"
+export const ZONE_MOUNTAIN_AT = 7000;  // 到达此米数切入"夜冥山"
+export const ZONE_TRANSITION_T = 0.55; // 区域切换泼墨过渡时长 s
 
 // ---- 生成 / 回收 ----
 export const SPAWN_EXTRA = 160;        // 事件生成前瞻：视野右缘额外预留

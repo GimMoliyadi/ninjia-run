@@ -30,11 +30,11 @@ const { makeEvent, waveHigh, pickDartPattern } = await import('../src/generator.
 const { speedAt, updateEnemies } = await import('../src/physics.js');
 const { aabb } = await import('../src/utils.js');
 
-// 重置到飞镖潮可控状态：平地、吃 dart_wave 模板（idx17）、清空障碍与生成游标
+// 重置到飞镖潮可控状态：平地、吃 dart_wave 模板（idx19）、清空障碍与生成游标
 function fresh() {
   resetGame();
   G.terrain = [{ type: 'flat', start: 0, end: 30000 }];
-  G.tplIdx = 17;
+  G.tplIdx = 19;
   G.obstacles = [];
   G.collectibles = [];
   G.scrollX = 0;
