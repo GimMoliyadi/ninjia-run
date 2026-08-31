@@ -3,8 +3,6 @@
 纯 Canvas 2D 绘制的水墨风横板跑酷。忍者奔跑、跳跃、滑铲，穿越竹林、村庄与夜山，
 躲避障碍、收集符印，冲刺更远的距离。
 
-![游戏截图](ninja-game-shot.png)
-
 ## 玩法
 
 自动向前奔跑，速度随距离逐渐加快。核心循环是「跑 — 跳 — 滑」三种身法躲避迎面而来的障碍，
@@ -106,8 +104,3 @@ node --test tests/continuous-slide.test.js tests/dart-wave.test.js tests/hp-syst
 ```
 
 33 个测试覆盖滑铲连击、飞镖波形、血条/护盾/忍术等核心机制。
-
-## 打包参赛
-
-小红书 vibe coding 参赛作品（截止 2026-09-07），产物为单 ZIP：
-`npm run build` 后打包 `index.html` 与 `dist/` 静态资源，体积需 < 10MB（当前约几十 KB）。
