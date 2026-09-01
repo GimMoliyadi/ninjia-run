@@ -3,7 +3,11 @@ import {
   INK, RED, GOLD, PW, PLAYER_X, SHIELD_WARN_T,
   COLLECT_RADIUS_EXTRA, DART_APPROACH_RANGE,
   START_SPEED, RUN_CYCLE_FPS, RUN_STRIDE_MIN, RUN_STRIDE_MAX, RUN_LEAN_RAD,
+  ROCK_WARN_T, ROCK_W, ROCK_H,
+  INK_WALL_H, INK_WALL_ARCH,
+  GROUND,
 } from '../constants.js';
+import { FRAMES, getImg } from '../sprites.js';
 
 const RUN_POSES = [
   { leg: -1, arm: 1, bob: 0 },
@@ -146,16 +150,37 @@ function drawSpeedTrail(x, y) {
   ctx.restore();
 }
 
+function drawSpriteFrame(frame, x, y) {
+  const img = getImg();
+  if (!img.complete || img.naturalWidth === 0) return false;
+  ctx.drawImage(img, frame.x, frame.y, frame.w, frame.h, x - 64, y - 128, 128, 128);
+  return true;
+}
+
 function drawPlayerNinja(x, y) {
   const p = G.player;
   drawSpeedTrail(x, y);
   ctx.save();
   if (p.onGround && p.sliding) {
+    const frame = FRAMES.slide[Math.floor(p.runT * 12) % FRAMES.slide.length];
+    if (drawSpriteFrame(frame, x, y)) {
+      ctx.restore();
+      return;
+    }
     ctx.translate(x, y);
     ctx.rotate(0.06);
     drawSlidePose();
   } else if (!p.onGround) {
-    if (p.jumps === 2) {
+    if (p.jumps === 1) {
+      const frame = p.vy < 0 ? FRAMES.jump1[0] : FRAMES.jump2[0];
+      if (drawSpriteFrame(frame, x, y)) {
+        ctx.restore();
+        return;
+      }
+      ctx.translate(x, y);
+      ctx.rotate(p.vy < 0 ? -0.1 : 0.08);
+      drawJumpPose();
+    } else if (p.jumps === 2) {
       ctx.translate(x, y - 26);
       ctx.rotate(Math.min(1, p.jumpT / 0.38) * Math.PI * 4);
       ctx.translate(0, 26);
@@ -166,13 +191,19 @@ function drawPlayerNinja(x, y) {
       drawJumpPose();
     }
   } else {
-    const pose = runPoseAt(p.runT);
-    ctx.translate(x, y - pose.bob);
-    ctx.rotate(RUN_LEAN_RAD);   // 冲刺躯干前倾，绕脚底旋转保持脚贴地
-    drawRunPose(p.runT);
+    const frame = FRAMES.run[Math.floor(p.runT * 12) % FRAMES.run.length];
+    if (!drawSpriteFrame(frame, x, y)) {
+      const pose = runPoseAt(p.runT);
+      ctx.translate(x, y - pose.bob);
+      ctx.rotate(RUN_LEAN_RAD);   // 冲刺躯干前倾，绕脚底旋转保持脚贴地
+      drawRunPose(p.runT);
+    }
   }
   ctx.restore();
 }
+
+// 导出：分身/预览等复用同一套忍者姿态绘制（跟随 G.player 状态）
+export function drawNinjaAvatar(x, y) { drawPlayerNinja(x, y); }
 
 export function drawPlayer() {
   const p = G.player;
@@ -332,6 +363,8 @@ export function drawObstacles() {
     else if (ob.kind === 'ninja') drawNinja(ob, x);
     else if (ob.kind === 'dart') drawDart(ob, x);
     else if (ob.kind === 'boulder') drawBoulder(ob, x);
+    else if (ob.kind === 'rock') drawRock(ob, x);
+    else if (ob.kind === 'inkwall') drawInkWall(ob, x);
     // 调试：显示障碍碰撞盒（F7 切换）
     if (G.debugMode) {
       ctx.strokeStyle = 'rgba(200,40,40,0.9)';
@@ -388,6 +421,94 @@ function drawBoulder(ob, x) {
     ctx.arc(cx - r + dx * 0.4, gy - 2 - dy * 0.3, 2.5 - i * 0.5, 0, Math.PI * 2);
     ctx.fill();
   }
+  ctx.restore();
+  groundMark(x, gy, ob.w);
+}
+
+// 落石：预警期（warnT>0）在地面画扩散阴影圈 + 红色警示环，随时间扩大强度；
+// 预警结束后画下落的墨晕团身岩石，落地后与 boulder 相似的墨纹旋转效果。
+function drawRock(ob, x) {
+  const gy = ob.landY + ob.h;  // 落点底部 = 地面
+  if (ob.warnT > 0) {
+    // 预警阶段：阴影圈从地面扩散，红色警示环同时闪烁 > 提示玩家"这里要落石"
+    const pul = 1 - ob.warnT / ROCK_WARN_T;        // 预警进度 0→1
+    const cx = x + ob.w / 2, r = (ob.w / 2 + 6) * (1 + pul * 0.4);
+    ctx.save();
+    // 墨色阴影随进度扩大
+    ctx.globalAlpha = 0.16 + pul * 0.22;
+    ctx.fillStyle = INK;
+    ctx.beginPath();
+    ctx.ellipse(cx, gy, r, r * 0.34, 0, 0, Math.PI * 2);
+    ctx.fill();
+    // 红色警示环（边缘闪烁）
+    ctx.strokeStyle = RED;
+    ctx.globalAlpha = 0.4 + pul * 0.5;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(cx, gy, r + 5, r * 0.34 + 3, 0, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+    groundMark(x, gy, ob.w);
+    return;
+  }
+  // 落地后：墨晕团身圆石 + 旋转白色墨纹，与 boulder 视觉一致
+  const r = ob.w / 2 + 2, cx = x + ob.w / 2, cy = ob.y + r;
+  const rot = G.gameTime * 6;
+  ctx.save();
+  ctx.fillStyle = 'rgba(36,36,43,0.96)';
+  ctx.beginPath();
+  ctx.moveTo(cx - r, cy);
+  ctx.quadraticCurveTo(cx - r * 0.9, cy - r * 1.15, cx, cy - r * 1.05);
+  ctx.quadraticCurveTo(cx + r * 0.95, cy - r * 1.15, cx + r, cy);
+  ctx.quadraticCurveTo(cx + r * 0.9, cy + r * 0.92, cx, cy + r);
+  ctx.quadraticCurveTo(cx - r * 0.92, cy + r * 0.95, cx - r, cy);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+  ctx.lineWidth = 3;
+  for (let i = 0; i < 2; i++) {
+    const a0 = rot + i * Math.PI;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 0.72, a0, a0 + 1.6);
+    ctx.stroke();
+  }
+  ctx.restore();
+  groundMark(x, gy, ob.w);
+}
+
+// 墨墙：从地面立起的墨色实墙，底部留拱门空隙供滑铲钻过。
+// 碰撞盒只覆盖上段（实墙），拱门区域无碰撞；
+// 渲染画到地面（含拱门视觉），让玩家看到拱门就知道可滑铲通过。
+function drawInkWall(ob, x) {
+  const gy = GROUND;  // 地面 y
+  const topY = gy - INK_WALL_H;          // 墙顶（离地 120px）
+  const archY = gy - INK_WALL_ARCH;       // 拱门顶部（离地 52px，滑铲通过的上沿）
+  ctx.save();
+  // 上段实墙：从顶部到拱门顶
+  ctx.fillStyle = 'rgba(36,36,43,0.96)';
+  ctx.fillRect(x, topY, ob.w, INK_WALL_H - INK_WALL_ARCH);
+  // 两侧墙脚柱子（拱门两边支撑）
+  const legW = 10;
+  ctx.fillRect(x + 2, archY, legW, INK_WALL_ARCH);
+  ctx.fillRect(x + ob.w - legW - 2, archY, legW, INK_WALL_ARCH);
+  // 波浪墨纹装饰：墙身上的白色波纹
+  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 2; i++) {
+    const wx = x + ob.w * (0.35 + i * 0.3);
+    ctx.beginPath();
+    ctx.moveTo(wx, topY + 8);
+    ctx.quadraticCurveTo(wx + 4, topY + (INK_WALL_H - INK_WALL_ARCH) / 2, wx - 2, archY - 6);
+    ctx.stroke();
+  }
+  // 拱门空隙上沿红色警示条：提示玩家"这里可滑铲"
+  ctx.fillStyle = RED;
+  ctx.fillRect(x + 2, archY, ob.w - 4, 4);
+  // 空隙标识红痕（地面标识）
+  ctx.globalAlpha = 0.5;
+  ctx.fillStyle = RED;
+  ctx.fillRect(x - 3, archY + 8, ob.w + 6, 3);
+  ctx.globalAlpha = 1;
   ctx.restore();
   groundMark(x, gy, ob.w);
 }

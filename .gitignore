@@ -2,3 +2,8 @@ node_modules/
 dist/
 .git-upload/
 vite-dev.log
+
+# 本地临时调研/截图产物，不入库
+.preview-shots/
+ink-ninja-run-xhs.zip
+itch_*.html

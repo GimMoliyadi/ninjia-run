@@ -1,5 +1,6 @@
 import { G, ctx } from './state.js';
 import { rand } from './utils.js';
+import { splats, splatsReady } from './assets.js';
 
 export function burst(x, y, n, o) {
   for (let i = 0; i < n; i++) {
@@ -49,10 +50,44 @@ export function updateParticles(dt) {
   }
 }
 
+// 墨渍爆散：在指定点叠加若干张 Kenney 墨渍（随机旋转/缩放/透明度），
+// 形成"泼墨四溅"的一次性效果。素材未就绪时降级为普通墨点，保证任何时刻都能播。
+export function splatBurst(x, y, count, alpha = 1, sizeScale = 1) {
+  const n = count || 3;
+  for (let i = 0; i < n; i++) {
+    if (splatsReady() && splats.length) {
+      G.particles.push({
+        kind: 'splat',          // 标记为墨渍粒子，绘制走图片分支
+        x, y,
+        vx: rand(-60, 60),      // 轻微漂移，模拟墨渍飞溅
+        vy: rand(-40, 20),
+        g: 60,
+        life: rand(0.4, 0.8), maxLife: 0.8,
+        img: splats[Math.floor(Math.random() * splats.length)],
+        size: rand(34, 72) * sizeScale,   // 墨渍显示尺寸（原图 256 太大，缩到几十像素）
+        rot: Math.random() * Math.PI * 2, // 随机朝向，让多张叠起来不呆板
+        spin: 0,
+      });
+    } else {
+      // 降级：素材没加载完时先铺一层普通墨点，视觉不至于空缺
+      burst(x, y, 6, { c: '40,40,46', sp: 160, up: 40, g: 500, s: [2, 5], l: [0.3, 0.7] });
+    }
+  }
+}
+
 export function drawParticles() {
   for (const p of G.particles) {
     const alpha = Math.max(0, p.life / p.maxLife);
     ctx.save();
+    if (p.kind === 'splat' && p.img) {
+      // 墨渍图片：半透明 + 随机旋转，叠出泼墨感
+      ctx.globalAlpha = alpha * 0.8;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.drawImage(p.img, -p.size / 2, -p.size / 2, p.size, p.size);
+      ctx.restore();
+      continue;
+    }
     ctx.globalAlpha = alpha;
     ctx.fillStyle = `rgb(${p.c})`;
     if (p.shape === 'stroke') {

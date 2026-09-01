@@ -18,7 +18,7 @@ globalThis.document = {
 };
 
 const { G } = await import('../src/state.js');
-const { CLEAR_SCORE, COIN_R, DASH_SHIFT_MAX, ENERGY_MAX, GROUND, NINJUTSU_DURATION, PLAYER_X, SHIELD_DUR, SHIELD_R, SLIDE_ACCEL_T, SLIDE_DUR, START_SPEED, W } = await import('../src/constants.js');
+const { CLEAR_SCORE, COIN_R, CLONE_DURATION, DASH_SHIFT_MAX, ENERGY_MAX, GROUND, PLAYER_X, SHIELD_DUR, SHIELD_R, SLIDE_ACCEL_T, SLIDE_DUR, START_SPEED, W } = await import('../src/constants.js');
 const { castNinjutsu, doJump, startSlide } = await import('../src/player.js');
 const { makeEvent } = await import('../src/generator.js');
 const { updateNinjutsu } = await import('../src/ninjutsu.js');
@@ -230,33 +230,41 @@ test('the opening route keeps each obstacle family in its own section', () => {
     if (!G.lastEventKind.startsWith('reward') && G.lastEventKind !== 'coins_flat') kinds.push(G.lastEventKind);
   }
 
-  assert.deepEqual(kinds, ['jump1', 'jump1', 'jump2', 'spike_row', 'slide', 'slide', 'slide', 'ninja', 'dart_wave', 'boulder', 'ninja', 'dart_wave', 'boulder', 'pillar', 'pillar']);
+  assert.deepEqual(kinds, ['jump1', 'jump1', 'jump2', 'spike_row', 'slide', 'slide', 'slide', 'ninja', 'dart_wave', 'boulder', 'rock', 'inkwall', 'ninja', 'dart_wave', 'boulder', 'rock', 'inkwall']);
 });
 
-test('ninjutsu wave destroys only obstacles it reaches', () => {
-  Object.assign(G.player, {
-    x: PLAYER_X,
-    y: 462,
-    invuln: 0,
-  });
+test('ink clone absorbs the obstacle it reaches, then expires', () => {
+  Object.assign(G.player, { x: PLAYER_X, y: 462, invuln: 0 });
   G.scrollX = 0;
   G.dashShift = 0;
   G.energy = ENERGY_MAX;
   G.collectScore = 0;
-  G.ninjutsu = null;
+  G.clone = null;
   G.obstacles = [
-    { kind: 'spike', x: 500, y: 412, w: 32, h: 50 },
+    { kind: 'spike', x: 318, y: 412, w: 32, h: 50 },
     { kind: 'spike', x: 1200, y: 412, w: 32, h: 50 },
   ];
 
   castNinjutsu();
   assert.equal(G.energy, 0);
-  assert.ok(G.ninjutsu);
+  assert.ok(G.clone);
   assert.equal(G.obstacles.length, 2);
 
+  // 分身位于玩家前方 CLONE_OFFSET，只清掉它碰到的那个障碍
   updateNinjutsu(0.22);
+  updateCollisions({ x: 247, y: 396, w: 46, h: 66 });
   assert.deepEqual(G.obstacles.map((ob) => ob.x), [1200]);
+  assert.equal(G.clone, null);
+  assert.equal(G.collectScore, CLEAR_SCORE);
+  assert.ok(G.player.invuln > 0);
 
-  updateNinjutsu(NINJUTSU_DURATION);
-  assert.equal(G.ninjutsu, null);
+  // 分身没被击中则满时长自然消散
+  G.energy = ENERGY_MAX;
+  G.collectScore = 0;
+  G.player.invuln = 0;
+  G.obstacles = [];
+  castNinjutsu();
+  assert.ok(G.clone);
+  updateNinjutsu(CLONE_DURATION);
+  assert.equal(G.clone, null);
 });

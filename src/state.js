@@ -38,7 +38,7 @@ export const G = {
 
   // 世界实体
   obstacles: [], collectibles: [], particles: [],
-  ninjutsu: null,
+  clone: null,               // 墨影分身（忍术）：释放后跟随玩家的半透明替身
   lastEventKind: 'rest',
 
   // 远处装饰

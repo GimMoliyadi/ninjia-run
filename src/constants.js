@@ -6,7 +6,7 @@ export const JUMP_V = 920;            // 一跳初速
 export const JUMP2_V = 840;           // 二段跳初速
 export const DIVE_V = 900;            // 俯冲初速
 export const START_SPEED = 360;       // 基础速度 px/s
-export const MAX_SPEED = 800;
+export const MAX_SPEED = 1000;
 export const STAND_H = 66;            // 站立高
 export const SLIDE_H = 32;            // 滑行高
 export const SLIDE_DUR = 0.72;        // 滑铲兜底上限：正常情况越过垂板即起身，此值防极端场景卡低姿态过久
@@ -35,16 +35,17 @@ export const GOLD = '#d8a441';        // 符咒金
 export const COIN_LOW = 38;           // 金币离地最小高度
 export const COIN_HIGH = 138;         // 金币离地最大高度（低于一跳极限，保证可达）
 export const COIN_GAP = 88;           // 同路线金币默认水平间距（保证连续可收集）
-export const SAFE_FLAT_PX = 5000;    // 前 50 米纯平地：新手先适应奔跑节奏
-export const SAFE_EVENT_PX = 1000;   // 前 10 米只出金币引导，之后进入障碍与奖励交替
+export const SAFE_FLAT_PX = 3000;    // 前 30 米纯平地：新手先适应奔跑节奏
+export const SAFE_EVENT_PX = 800;   // 前 8 米只出金币引导，之后进入障碍与奖励交替
 export const REACT_T = 0.34;          // 障碍最小反应时间 s
+export const OB_GAP_MIN = 250;        // 静态障碍最小间距：约一个跳跃距离，防重叠/堵死
 
 // ---- 忍术 / 收集 / 连击 ----
 export const ENERGY_MAX = 100;         // 忍术能量上限
-export const NINJUTSU_DURATION = 1.65; // 前方冲击波持续时间 s
-export const NINJUTSU_SPEED = 920;     // 冲击波前进速度 px/s
-export const NINJUTSU_RADIUS = 78;     // 冲击波横向命中半径
-export const NINJUTSU_INVULN_T = NINJUTSU_DURATION;
+export const CLONE_DURATION = 5;       // 墨影分身持续时长 s
+export const CLONE_OFFSET = 48;        // 分身相对玩家屏幕前方偏移 px
+export const CLONE_INVULN_T = 2;       // 分身消散后玩家的无敌时长 s
+export const CLONE_CAST_INVULN_T = 0.5; // 释放忍术瞬间的短暂无敌 s
 export const SHIELD_DUR = 10;           // 护盾持续时间
 export const SHIELD_WARN_T = 3;         // 护盾进入闪光提示的剩余时间
 export const CLEAR_SCORE = 50;         // 每清一个障碍的分
@@ -67,6 +68,22 @@ export const DMG_DART = DMG_SPIKE;  // 飞镖擦伤：与尖刺同级轻伤
 // 持刀忍者：贴地近战敌人，无远程、无预警——纯近身威胁，碰到砍一刀扣 DMG_NINJA。
 // 刀身带呼吸式反光闪动作为危险提示，让"活物"感与静态障碍区分。
 export const NINJA_W = 26, NINJA_H = 58;     // 忍者碰撞盒（贴地）
+
+// ---- 落石（预警障碍） ----
+// 落石：从高处坠下的岩石，落地前 0.5s 地面出现扩散阴影圈预警 → 跳跃躲避。
+// 预警与下落途中无碰撞，落地后按静态尖刺级轻伤处理。
+export const ROCK_WARN_T = 0.5;          // 预警时长 s（阴影圈提示）
+export const ROCK_FALL_V = 1500;         // 落石下落速度 px/s
+export const ROCK_W = 40, ROCK_H = 40;   // 落石碰撞盒（方形贴地）
+export const DMG_ROCK = DMG_SPIKE;       // 落石砸伤：与尖刺同级轻伤
+
+// ---- 墨墙（滑铲障碍） ----
+// 墨墙：从地面立起的墨色实墙，底部留拱门空隙 → 站立必撞、只能滑铲钻过。
+// 与垂板互补：垂板顶天花板/下沿离地，墨墙立地面/上段实墙+下段拱门。
+export const INK_WALL_W = 56;            // 墨墙宽度
+export const INK_WALL_H = 120;           // 墨墙总高（从地面）
+export const INK_WALL_ARCH = 52;         // 拱门空隙高（≥ 滑铲盒高+余量）
+export const DMG_WALL = DMG_PILLAR;      // 墨墙撞伤：与石柱同级
 
 // ---- 滚石（迎面动态障碍） ----
 // 滚石：贴地迎面滚来的大圆石，跳跃越过；撞上扣尖刺级轻伤。
@@ -94,15 +111,18 @@ export const DART_WAVE_TAIL_GAP = 400;           // 波尾隔离：后续静态�
 // 波形编排：每波由单个 pattern 决定高低轨序列（而非每枚独立随机），按距离从纯波教学渐进到混合波。
 // 顺序即难度阶梯：hop(全跳)→slide(全滑)→alt(交替)→lead(末枚孤高收尾)。
 export const DART_PATTERN_MIX = ['hop', 'slide', 'alt', 'lead'];
-export const DART_PATTERN_MIX_M = 1500;          // 教学期：此距离内只出纯波（跳/滑）
-export const DART_PATTERN_HARD_M = 4000;         // 越过教学期加入交替，之后含收尾加强
+export const DART_PATTERN_MIX_M = 60;           // 教学期：此距离内只出纯波（跳/滑）
+export const DART_PATTERN_HARD_M = 150;         // 越过教学期加入交替，之后含收尾加强
 export const DART_APPROACH_RANGE = 340;          // 入场墨晕作用范围：飞镖距玩家短于此才开始收敛实心
 export const COMBO_SCORE = 10;         // 连击单枚金币基础分
 export const COMBO_CAP = 5;            // 连击计分上限
 export const COMBO_TIMEOUT = 3;        // 连击保持时间 s
-export const COIN_ENERGY = 1;          // 单枚金币能量（主动收集约 15 秒攒满一次忍术）
-export const SCROLL_ENERGY = 30;       // 单卷轴能量（高空大跳奖励）
+export const COIN_ENERGY = 2;          // 单枚金币能量（主动收集约 30-60 秒攒满一次忍术）
+export const SCROLL_ENERGY = 25;       // 单卷轴能量（高空大跳奖励）
 export const SCROLL_SCORE = 30;        // 单卷轴分
+export const HIT_ENERGY = 15;          // 受击一次补充能量：挨打换忍术
+export const DODGE_ENERGY = 10;        // 完美闪避补充能量：贴脸躲过障碍
+export const DODGE_SCORE = 40;         // 完美闪避加分
 
 // ---- 物理 / 判定 ----
 export const DIVE_GRAV_MULT = 1.8;     // 俯冲时重力倍率
@@ -122,8 +142,8 @@ export const SCORE_PER_PX = 10;        // 每前进 10px 得 1 分
 export const PX_PER_M = 100;           // 每 100px 计 1 米
 
 // ---- 场景区域（Zone） ----
-export const ZONE_VILLAGE_AT = 3000;   // 到达此米数切入"黄昏村"
-export const ZONE_MOUNTAIN_AT = 7000;  // 到达此米数切入"夜冥山"
+export const ZONE_VILLAGE_AT = 200;   // 到达此米数切入"黄昏村"
+export const ZONE_MOUNTAIN_AT = 500;  // 到达此米数切入"夜冥山"
 export const ZONE_TRANSITION_T = 0.55; // 区域切换泼墨过渡时长 s
 
 // ---- 生成 / 回收 ----

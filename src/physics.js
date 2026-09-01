@@ -5,12 +5,15 @@ import {
   GRAV, DIVE_GRAV_MULT, LAND_IMPACT_VY, PIT_FALL_VY, ABYSS, DEATH_DEPTH_MARGIN,
   COMBO_TIMEOUT, COMBO_SCORE, COMBO_CAP, ENERGY_MAX, COIN_ENERGY, SCROLL_ENERGY, SCROLL_SCORE, SHIELD_DUR,
   CLEAR_SCORE, CLEAN_MARGIN,
-  COLLECT_RADIUS_EXTRA, PW, PLAYER_X, W,
+  COLLECT_RADIUS_EXTRA, PW, PLAYER_X, W, STAND_H,
   HIT_INVULN_T, HIT_KNOCK_PX,
+  HIT_ENERGY, DODGE_ENERGY, DODGE_SCORE,
   DART_SPEED, BOULDER_SPEED,
+  ROCK_FALL_V,
+  CLONE_INVULN_T,
 } from './constants.js';
 import { groundYAt, segTypeAt } from './terrain.js';
-import { burst, inkBurst } from './particles.js';
+import { burst, inkBurst, splatBurst } from './particles.js';
 import { aabb, circleRect } from './utils.js';
 import { finishSlide, die } from './player.js';
 
@@ -19,13 +22,13 @@ export function updateMetrics() {
   G.distM = Math.floor(G.scrollX / PX_PER_M);
 }
 
-// 速度曲线：按行进距离分段加速，约 1 万米后封顶，避免前期难度陡增
+// 速度曲线：按行进距离分段加速，约 1 千米后封顶（单局 2-3 分钟节奏）
 const SPEED_STAGES = [
   { at: 0, speed: START_SPEED },   // 开局
-  { at: 1000, speed: 480 },        // 1 千米：新手适应期
-  { at: 3000, speed: 600 },        // 3 千米
-  { at: 6000, speed: 700 },        // 6 千米
-  { at: 10000, speed: MAX_SPEED }, // 1 万米：达到最快
+  { at: 200, speed: 520 },         // 竹林区加速
+  { at: 500, speed: 700 },         // 黄昏村
+  { at: 800, speed: 900 },         // 夜冥山
+  { at: 1000, speed: MAX_SPEED },  // 1 千米：达到最快
 ];
 export function speedAt(m) {
   const last = SPEED_STAGES[SPEED_STAGES.length - 1];
@@ -90,10 +93,18 @@ export function updateSpeed(dt) {
 }
 
 // 活体障碍每帧推进：飞镖与滚石迎面朝玩家水平飞（世界坐标 x 递减），碰撞盒与渲染共用当前位置。
+// 落石固定在世界坐标 x，预警期（warnT>0）倒计时，结束后从上方急速下落到地面。
 export function updateEnemies(dt) {
   for (const ob of G.obstacles) {
     if (ob.kind === 'dart') ob.x -= DART_SPEED * dt;
     else if (ob.kind === 'boulder') ob.x -= BOULDER_SPEED * dt;
+    else if (ob.kind === 'rock') {
+      if (ob.warnT > 0) {
+        ob.warnT -= dt;  // 预警倒计时，期间无碰撞，仅在地面显示扩散阴影圈
+      } else if (ob.y < ob.landY) {
+        ob.y = Math.min(ob.landY, ob.y + ROCK_FALL_V * dt);  // 预警结束，落石急速下落
+      }
+    }
   }
 }
 
@@ -162,6 +173,22 @@ function destroyHazard(list, index, hazard) {
   burst(hazard.x - G.scrollX + hazard.w / 2, hazard.y + hazard.h / 2, 14, { c: '72,146,164', sp: 190, up: 80, g: 480, s: [1, 4], l: [0.2, 0.5] });
 }
 
+// 墨影分身碰撞盒
+function cloneBox(c) {
+  return { x: c.x - PW / 2, y: c.y - STAND_H, w: PW, h: STAND_H };
+}
+
+// 分身替挡：消散 + 无敌 + 墨渍爆裂（Splat 墨渍叠加，视觉更浓烈）
+function breakClone() {
+  const c = G.clone;
+  if (!c) return;
+  G.clone = null;
+  G.player.invuln = Math.max(G.player.invuln, CLONE_INVULN_T);
+  const cx = c.x - G.scrollX, cy = c.y - STAND_H;
+  splatBurst(cx, cy, 4, 1, 1.3);          // 大号墨渍爆散，体现"替挡"的分量
+  inkBurst(cx, cy, 10, 1.2);              // 再铺一层细墨点，增加飞溅层次
+}
+
 // 碰撞检测：仅深坑坠落即死；普通障碍按血条扣血 + 无敌帧，奔跑不中断。
 // 护盾可挡下普通伤害障碍（清障加分），但挡不住深坑即死。
 export function updateCollisions(box) {
@@ -171,16 +198,43 @@ export function updateCollisions(box) {
   G.wallPushed = false;
   for (let i = G.obstacles.length - 1; i >= 0; i--) {
     const ob = G.obstacles[i];
-    if (!aabb(box, ob) || p.invuln > 0) continue;
+    // 落石预警/下落途中无碰撞：只有落地形成实体才参与判定
+    if (ob.kind === 'rock' && (ob.warnT > 0 || ob.y < ob.landY)) continue;
+
+    // 墨影分身挡灾：分身在场且障碍与分身相交 → 分身消散替挡（仅一次，beam 纯推挤不分担）
+    if (G.clone && ob.kind !== 'beam') {
+      const pbox = cloneBox(G.clone);
+      if (ob.x < pbox.x + pbox.w && ob.x + ob.w > pbox.x) {
+        if (ob.y < pbox.y + pbox.h && ob.y + ob.h > pbox.y) {
+          breakClone();
+          G.obstacles.splice(i, 1);
+          G.collectScore += CLEAR_SCORE;
+          continue;
+        }
+      }
+    }
+
+    if (!aabb(box, ob)) {
+      // 完美闪避：障碍水平掠过玩家范围但垂直不相交（跳过/滑过）→ 加分+能量
+      if (!ob.dodged && ob.kind !== 'beam') {
+        const hOverlap = ob.x < box.x + box.w && ob.x + ob.w > box.x;
+        if (hOverlap) {
+          ob.dodged = true;
+          G.energy = Math.min(ENERGY_MAX, G.energy + DODGE_ENERGY);
+          G.collectScore += DODGE_SCORE;
+        }
+      }
+      continue;
+    }
+    if (p.invuln > 0) continue;
     if (p.shieldT > 0) { destroyHazard(G.obstacles, i, ob); continue; }
     if (ob.kind === 'beam') { if (wallPush(ob)) return true; continue; }  // 实体墙：被顶住推挤，不掉血
-    // 普通伤害物（尖刺 / 石柱 / 剑忍 / 飞镖）：扣血 + 短暂无敌，血尽才终局。
-    // 受击后撤：把站位推向画面左（身后，与墙顶被顶回同一方向），
-    // 下一帧起由 updateSpeed 的站位恢复逻辑匀速拉回，形成"撞上被弹退、踉跄归位"的反馈，奔跑本身不中断。
+    // 普通伤害物：扣血 + 短暂无敌 + 补能量（挨打换忍术）
     p.hp -= ob.dmg;
     p.invuln = HIT_INVULN_T;
     p.hpBarT = 1; // 受伤点亮血条（平时隐藏）
     p.x = Math.min(p.x, PLAYER_X - HIT_KNOCK_PX);
+    G.energy = Math.min(ENERGY_MAX, G.energy + HIT_ENERGY); // 受击补能量
     // 飞镖是迎面活物，受击用水墨爆（stroke+drop 双形态更足）；其余静态障碍保持常规墨点。
     if (ob.kind === 'dart') {
       inkBurst(ob.x - G.scrollX + ob.w / 2, ob.y + ob.h / 2, 14, 1.2);

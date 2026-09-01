@@ -11,6 +11,9 @@ import {
   DART_FIRST_LEAD, DART_PIT_LAND_GAP, DART_WAVE_TAIL_GAP,
   DART_PATTERN_MIX, DART_PATTERN_MIX_M, DART_PATTERN_HARD_M,
   BOULDER_W, BOULDER_H, BOULDER_SPEED,
+  ROCK_W, ROCK_H, ROCK_WARN_T, DMG_ROCK,
+  INK_WALL_W, INK_WALL_H, INK_WALL_ARCH, DMG_WALL,
+  OB_GAP_MIN,
 } from './constants.js';
 import { segAt, segTypeAt } from './terrain.js';
 import { speedAt } from './physics.js';
@@ -34,10 +37,14 @@ const EVENT_TPL = [
   'ninja', 'reward_dash',
   'dart_wave',        // 飞镖潮独占区段：整波一次生成，高低轨随机混合，潮前潮后有平静段
   'boulder',          // 滚石：贴地迎面滚来的单体动态障碍
+  'rock',             // 落石预警：落地前阴影圈提示，跳跃躲避
+  'inkwall',          // 墨墙：底部拱门空隙，滑铲钻过
   'coins_flat',
   'ninja', 'reward_dash',
   'dart_wave',
   'boulder',
+  'rock',
+  'inkwall',
   'coins_flat',
 
   'pillar', 'reward_arc',
@@ -72,6 +79,16 @@ function hazardClearanceAt(x) {
   const airT = 2 * JUMP_V / GRAV;           // 滞空时间
   const pace = speedAt(x / PX_PER_M);
   return Math.max(pace * (airT + REACT_T) * 0.9, pace * airT + 110);
+}
+
+// 间距检测：新障碍落点 [x, x+len] 不得与既有静态障碍重叠/过近（至少 OB_GAP_MIN 空隙）。
+// dart/boulder 是迎面动态障碍（靠 lead+隔离带自排），rock 落地即固定，需纳入。
+function obstacleGapOk(x, len) {
+  const lo = x - OB_GAP_MIN, hi = x + len + OB_GAP_MIN;
+  return !G.obstacles.some((ob) =>
+    (ob.kind === 'dart' || ob.kind === 'boulder') ? false :
+    ob.x < hi && ob.x + ob.w > lo
+  );
 }
 
 function pickGap() {
@@ -150,14 +167,14 @@ export function makeEvent(x) {
   switch (tpl) {
     case 'jump1': {   // 单个地面障碍 + 高跳引导弧线
       const S = OBSTACLES.spike;
-      if (flatFrom(x, 320)) {
+      if (flatFrom(x, 320) && obstacleGapOk(x, S.w)) {
         addObstacle({ kind: 'spike', x, y: gy - S.yOff, w: S.w, h: S.h, dmg: S.dmg });
       } else coinsLow(x);
       break;
     }
     case 'jump2': {   // 双柱（连续，可跳）
       const S = OBSTACLES.spike;
-      if (flatFrom(x, 330) && flatFrom(x + 150, 60)) {
+      if (flatFrom(x, 330) && flatFrom(x + 150, 60) && obstacleGapOk(x, 150 + S.w)) {
         addObstacle({ kind: 'spike', x, y: gy - S.yOff, w: S.w, h: S.h, dmg: S.dmg });
         addObstacle({ kind: 'spike', x: x + 150, y: gy - S.yOff, w: S.w, h: S.h, dmg: S.dmg });
       } else coinsLow(x);
@@ -166,7 +183,7 @@ export function makeEvent(x) {
     case 'spike_row': {   // 地刺阵：3-4 根连续尖刺，逐一跳跃越过
       const S = OBSTACLES.spike;
       const n = rint(3, 4), gap = 150;
-      if (flatFrom(x, n * gap + 60)) {
+      if (flatFrom(x, n * gap + 60) && obstacleGapOk(x, n * gap)) {
         for (let i = 0; i < n; i++) {
           addObstacle({ kind: 'spike', x: x + i * gap, y: gy - S.yOff, w: S.w, h: S.h, dmg: S.dmg });
         }
@@ -175,7 +192,7 @@ export function makeEvent(x) {
     }
     case 'pillar': {  // 石柱：跳跃越过
       const P = OBSTACLES.pillar;
-      if (flatFrom(x, 300)) {
+      if (flatFrom(x, 300) && obstacleGapOk(x, P.w)) {
         addObstacle({ kind: 'pillar', x, y: gy - P.yOff, w: P.w, h: P.h, dmg: P.dmg });
       } else coinsLow(x);
       break;
@@ -183,13 +200,13 @@ export function makeEvent(x) {
     case 'slide': {   // 垂板：从天花板垂下，底部留空隙，滑铲通过
       const B = OBSTACLES.beam;
       const bw = rint(B.wMin, B.wMax);
-      if (flatFrom(x, bw + 60)) {
+      if (flatFrom(x, bw + 60) && obstacleGapOk(x, bw)) {
         addObstacle({ kind: 'beam', x, y: 0, w: bw, h: gy - B.gap });
       } else coinsLow(x);
       break;
     }
     case 'ninja': {   // 剑忍：贴地近战，碰到砍一刀扣 DMG_NINJA（最大伤害），跳跃越过
-      if (flatFrom(x, 260)) {
+      if (flatFrom(x, 260) && obstacleGapOk(x, NINJA_W)) {
         addObstacle({ kind: 'ninja', x, y: gy - NINJA_H, w: NINJA_W, h: NINJA_H, dmg: DMG_NINJA });
       } else coinsLow(x);
       break;
@@ -225,6 +242,19 @@ export function makeEvent(x) {
         const lead = x + BOULDER_SPEED * REACT_T + 120;  // 首石预警距离：反应时间窗 + 余量
         addObstacle({ kind: 'boulder', x: lead, y: gy - BOULDER_H, w: BOULDER_W, h: BOULDER_H, dmg: DMG_SPIKE });
         G.nextSpawnX = Math.max(G.nextSpawnX, lead + 120);
+      } else coinsLow(x);
+      break;
+    }
+    case 'rock': {   // 落石预警：从高空砸下，落地前 0.5s 地面出现扩散阴影圈 → 跳跃躲避
+      if (flatFrom(x, 200) && obstacleGapOk(x, ROCK_W)) {
+        addObstacle({ kind: 'rock', x, y: -ROCK_H, landY: gy - ROCK_H, w: ROCK_W, h: ROCK_H, dmg: DMG_ROCK, warnT: ROCK_WARN_T });
+      } else coinsLow(x);
+      break;
+    }
+    case 'inkwall': {   // 墨墙：从地面立起的实墙，底部拱门空隙，滑铲钻过
+      if (flatFrom(x, 200) && obstacleGapOk(x, INK_WALL_W)) {
+        const y = gy - INK_WALL_H, h = INK_WALL_H - INK_WALL_ARCH;
+        addObstacle({ kind: 'inkwall', x, y, w: INK_WALL_W, h, dmg: DMG_WALL });
       } else coinsLow(x);
       break;
     }

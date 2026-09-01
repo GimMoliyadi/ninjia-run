@@ -2,7 +2,7 @@ import { G, ST } from './state.js';
 import {
   START_SPEED, PLAYER_X, JUMP_V, JUMP2_V, DIVE_V, AIR_CANCEL_V, JUMP_BUFFER,
   DASH_JUMP_BOOST_DUR, DASH_SHIFT_MAX,
-  DOUBLE_TAP_MS, NINJUTSU_DURATION, NINJUTSU_INVULN_T, NINJUTSU_RADIUS, ENERGY_MAX, HP_MAX,
+  DOUBLE_TAP_MS, CLONE_DURATION, CLONE_OFFSET, CLONE_CAST_INVULN_T, ENERGY_MAX, HP_MAX,
   W,
 } from './constants.js';
 import { initTerrain, groundYAt } from './terrain.js';
@@ -26,7 +26,7 @@ export function resetGame() {
   G.dashShift = 0;
   G.dashHoldT = 0;
   G.obstacles = []; G.collectibles = []; G.particles = [];
-  G.ninjutsu = null;
+  G.clone = null;
   G.lastEventKind = 'rest';
   G.tplIdx = 0;
   G.coyote = 0; G.jumpBuf = 0;
@@ -36,7 +36,7 @@ export function resetGame() {
 
 export function die() {
   G.state = ST.DEAD;
-  G.ninjutsu = null;
+  G.clone = null;
   G.deadAt = G.gameTime;
   // 结算分
   updateMetrics();
@@ -131,15 +131,9 @@ export function castNinjutsu() {
   const p = G.player;
   if (G.energy < ENERGY_MAX || p.invuln > 0) return;
   G.energy = 0;
-  p.invuln = NINJUTSU_INVULN_T;
-  G.ninjutsu = {
-    x: G.scrollX + p.x + G.dashShift + 48,
-    y: p.y - 42,
-    age: 0,
-    duration: NINJUTSU_DURATION,
-    radius: NINJUTSU_RADIUS,
-  };
-  inkBurst(p.x + G.dashShift + 26, p.y - 42, 28, 1.25);
+  p.invuln = CLONE_CAST_INVULN_T;
+  G.clone = { age: 0, duration: CLONE_DURATION };
+  inkBurst(p.x + G.dashShift + CLONE_OFFSET, p.y - 42, 20, 1.2);
 }
 
 export function startGame() { resetGame(); }
