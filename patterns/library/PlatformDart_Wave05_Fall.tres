@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave05_Fall"
+display_name = "落阶 · 站稳一拍再压低"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 5.35
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "三台逐级降低：第一台落稳滑铲，跨坑跳过低镖后在中间宽台站稳，不用接台尾滑铲；再跳到低台，落稳后铲过高镖。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.6000, "pattern": "landing_slide", "width": 400.0, "height": 85.0},
+{"beat": 2.0375, "pattern": "vault", "width": 480.0, "height": 75.0},
+{"beat": 3.6750, "pattern": "landing_slide", "width": 440.0, "height": 65.0}
+]}

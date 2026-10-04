@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P21_SpikeShuriken"
+display_name = "地刺加顶部飞镖"
+template = "P21"
+instruction = "跳过地刺，控制高度，避免冲入顶部飞镖"
+supports_mirror = false
+supports_reverse = false
+parameters = {"position": 520.0, "spike_width": 40.0, "height": 205.0, "speed": 240.0}

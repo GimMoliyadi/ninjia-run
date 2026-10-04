@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://components/jump_pillar.gd" id="1"]
+[node name="JumpPillar" type="StaticBody2D"]
+script = ExtResource("1")

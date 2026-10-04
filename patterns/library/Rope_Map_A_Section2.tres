@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=5 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave03_ChainFlip.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave04_ShortSpike.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave06_Breath.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+section_name = "Rope_Map_A_Section2"
+display_name = "二 · 短句与识刺"
+stages = PackedStringArray("短句 · 上—下—上", "识刺 · 中拍上侧地刺", "短呼吸 · 回气")
+stage_entries = PackedInt32Array(1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4")])

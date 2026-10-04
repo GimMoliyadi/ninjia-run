@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Seg7_Breath2.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Seg8_Climax.tres" id="3"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="recovery_script"]
+
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("recovery_script")
+duration = 1.2
+recovery_label = "出阵 · 落地接续下一地图"
+coin_count = 3
+
+[resource]
+script = ExtResource("1")
+section_name = "Dart_Map_A_Climax"
+display_name = "三 · 回拍、呼应与收势"
+stages = PackedStringArray("重复 · 低双带入高潮", "高潮 · 折返呼应，横排收阵", "收势 · 落地接续下一地图")
+stage_entries = PackedInt32Array(1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), SubResource("Recovery")])

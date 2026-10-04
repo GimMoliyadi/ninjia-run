@@ -1,0 +1,80 @@
+[
+  {
+    "Test": "area_signal_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nArea signal regression passed: pickups and hazards notify through Area2D signals."
+  },
+  {
+    "Test": "authored_route_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nGenerated route regression passed: the visible first cycle is procedural and seed-reproducible."
+  },
+  {
+    "Test": "boost_pool_regression.gd",
+    "Passed": false,
+    "Exit": 1,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nContinuous flip lost momentum\nBuffered flips did not chain\nRope jump failed"
+  },
+  {
+    "Test": "camera_lock_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nDynamic camera passed: leading follow, zoom, hit shake and restart"
+  },
+  {
+    "Test": "combat_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nCombat regression passed: health, sword, swept hits, homing, cooldowns, pause, death and reset."
+  },
+  {
+    "Test": "dart_patterns_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nDart patterns passed: four patterns, locked aim, bounded waves and no-damage passage at 400/620 px/s without abilities."
+  },
+  {
+    "Test": "encounter_generation_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nChunk regression passed: generated scene chunks extend and recycle across the infinite route."
+  },
+  {
+    "Test": "player_jump_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nJump regression passed: buffered jump is consumed and the player leaves the ground."
+  },
+  {
+    "Test": "player_visual_regression.gd",
+    "Passed": false,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nScarf anchor detached\nSCRIPT ERROR: Invalid access to property or key 'WIND_SPACING' on a base object of type 'Line2D (scarf.gd)'.\n   at: run (res://tests/godot/player_visual_regression.gd:60)\n   GDScript backtrace (most recent call first):\n       [0] run (res://tests/godot/player_visual_regression.gd:60)\n       [1] frames (res://tests/godot/player_visual_regression.gd:13)"
+  },
+  {
+    "Test": "rhythm_route_generator_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nRhythm route regression passed: the first cycle is generated and a fixed seed remains repeatable."
+  },
+  {
+    "Test": "rope_regression.gd",
+    "Passed": false,
+    "Exit": 1,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nRepeated flip did not return to top\nReturning to top must restore upright running\nRope jump failed\nJump immediately reattached"
+  },
+  {
+    "Test": "scarf_history_regression.gd",
+    "Passed": false,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nScarf must have twenty points\nTip must taper to one pixel\nSCRIPT ERROR: Invalid call. Nonexistent function '_process' in base 'Line2D (scarf.gd)'.\n   at: run (res://tests/godot/scarf_history_regression.gd:26)\n   GDScript backtrace (most recent call first):\n       [0] run (res://tests/godot/scarf_history_regression.gd:26)"
+  },
+  {
+    "Test": "slide_momentum_regression.gd",
+    "Passed": true,
+    "Exit": 0,
+    "Output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\nMomentum passed: normal 226.7px, slide jump 342.0px, ratio 1.51"
+  }
+]

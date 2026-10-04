@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave02_FallFlip"
+display_name = "复习 · 下侧再来，守上绳"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 1.9
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Repeat")
+instruction = "下侧再来同样的两枚短串，只复习一次刚学会的单侧避让，继续守上绳。两枚都通过以后再看前方：下一拍封锁侧会换到上面，不要提前翻入当前的下侧镖串。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4}
+]}

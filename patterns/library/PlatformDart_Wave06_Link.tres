@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave06_Link"
+display_name = "折桥 · 峰台合招后回落"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 6.65
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "起台先铲高镖，跳过低镖后在第二座宽台站稳；再登最高台，跳过坑中镖、落稳铲台尾镖；最后跨坑回落到无台尾镖的宽台，站稳收势。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.6000, "pattern": "landing_slide", "width": 400.0, "height": 70.0},
+{"beat": 1.9875, "pattern": "vault", "width": 480.0, "height": 95.0},
+{"beat": 3.5750, "pattern": "vault_slide", "width": 400.0, "height": 120.0},
+{"beat": 4.9625, "pattern": "vault", "width": 440.0, "height": 95.0}
+]}

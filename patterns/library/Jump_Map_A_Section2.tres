@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=6 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave05_Heights.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave_Falling_Blades.tres" id="4"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="RecoveryScript"]
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("RecoveryScript")
+duration = 1.2
+coin_count = 6
+coin_spacing = 56.0
+recovery_label = "柱刺结束 · 短金币奖励"
+
+[resource]
+script = ExtResource("1")
+section_name = "Jump_Map_A_Section2"
+display_name = "二 · 碎台与悬刃"
+stages = PackedStringArray("踏石识裂 · 稳台接碎台", "悬刃读招 · 压低再登台", "短奖励 · 收金币")
+stage_entries = PackedInt32Array(1, 1, 1)
+entries = Array[Resource]([ExtResource("3"), ExtResource("4"), SubResource("Recovery")])

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave07_TopRow"
+display_name = "换侧 · 先下后上"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 3.3
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Introduce")
+instruction = "先看上侧两枚短串，利用前拍结束后的空白翻到下绳。等上侧末枚通过，在两组之间的空白翻回上绳，避开随后到来的下侧短串。仍是同样的两枚镖，只把两次单侧避让接成下—上的短句。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"darts","safe_side":1,"count":2,"rows":1,"spacing":0.4},
+{"beat":2.0,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4}
+]}

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave01_Pulse"
+display_name = "地刺一 · 短刺教学"
+template = "JUMP_WAVE"
+difficulty = 1
+duration = 1.2
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "Introduce")
+instruction = "短刺只需一段跳；从障碍前沿起跳，落地后进入下一题。"
+parameters = {"phrases": [
+{"beat": 0.55, "pattern": "single_spike", "width_ratio": 2.4}
+]}

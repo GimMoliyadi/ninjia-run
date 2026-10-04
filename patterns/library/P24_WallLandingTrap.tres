@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P24_WallLandingTrap"
+display_name = "飞镖墙后落点陷阱"
+template = "P24"
+instruction = "穿过安全口后用二段跳延后落点；注意前方地刺"
+parameters = {"safe_gap_position": 110.0, "safe_gap_size": 116.0, "wall_speed": 240.0, "spawn_distance": 650.0, "landing_time_ratio": 0.75, "spike_width": 44.0}

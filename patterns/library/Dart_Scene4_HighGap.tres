@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Scene4_HighGap"
+display_name = "高潮前置三连镖（P30）"
+template = "P30"
+difficulty = 3
+duration = 2.2
+length = 1400.0
+start_delay = 0.3
+instruction = "Escalate：混合高潮先用高位→贴地→齐胸三枚单飞镖快速推进，第二枚逼出的跳跃可连续越过第三枚，再承接中口飞镖墙"
+supports_mirror = true
+parameters = {"speed": 230.0, "darts": [{"height": 165.0, "delay": 0.0, "distance": 400.0}, {"height": 8.0, "delay": 0.58, "distance": 400.0}, {"height": 74.0, "delay": 1.14, "distance": 400.0}]}
+tags = PackedStringArray("dart_wave", "wave_5", "escalate")

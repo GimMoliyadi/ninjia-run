@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MapModuleData" load_steps=6 format=3]
+[ext_resource type="Script" path="res://patterns/map_module_data.gd" id="1"]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="2"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="3"]
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("3")
+duration = 1.4
+recovery_label = "短喘息 · 落地拾金"
+coin_count = 3
+[sub_resource type="Resource" id="Section"]
+script = ExtResource("2")
+section_name = "ShortRecovery"
+display_name = "短喘息"
+stages = PackedStringArray("Recovery：落地与重读")
+stage_entries = PackedInt32Array(1)
+entries = Array[Resource]([SubResource("Recovery")])
+[resource]
+script = ExtResource("1")
+module_id = "Short_Recovery"
+display_name = "短喘息 · 落地拾金"
+theme = "RECOVERY"
+sections = Array[PatternSectionData]([SubResource("Section")])

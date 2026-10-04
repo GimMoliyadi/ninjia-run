@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P22_GapCeiling"
+display_name = "深坑加顶部飞镖"
+template = "P22"
+instruction = "点按跳跃过坑，必要时按下急降：注意顶部飞镖"
+parameters = {"position": 520.0, "pit_width": 80.0, "height": 190.0, "speed": 220.0}

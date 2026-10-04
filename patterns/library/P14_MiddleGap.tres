@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P14_MiddleGap"
+display_name = "中部安全口飞镖墙"
+template = "P14"
+instruction = "中间安全口：控制跳跃高度"
+supports_mirror = true
+parameters = {"safe_gap_position": 110.0, "safe_gap_size": 116.0, "wall_speed": 240.0, "spawn_distance": 650.0}

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P17_GapSwitch"
+display_name = "上下换位飞镖墙"
+template = "P17"
+instruction = "按人工顺序连续换位：中 → 高 → 低"
+supports_mirror = true
+supports_reverse = true
+parameters = {"wall_count": 3, "wall_interval": 2.0, "gap_positions": [110.0, 165.0, 40.0, 130.0], "wall_speed": 240.0, "gap_size": 116.0, "spawn_distance": 650.0}

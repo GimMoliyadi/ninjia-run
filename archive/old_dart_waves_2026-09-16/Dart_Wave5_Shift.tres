@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave5_Shift"
+display_name = "上升门与下降门"
+template = "DART_WAVE"
+difficulty = 1
+duration = 16.0
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Vary")
+instruction = "两道门，各自被两条斜线包住，门不再是独立的一格而是一句话的中间。第一句：RISE 上升（36→96→152→200）把玩家抬到中位 → 低位门（滑铲）→ FALL 下降收回去。因为上升斜线的终点在 200，玩家落下来的时候正好是滑铲高度，滑铲是自然衔接而不是突然要求。第二句换个形状重来：SHORT 升 → 低位门 → SHORT 降。第三句留给抬升门：HIGH 上升（152→200→300）把玩家推到高位 → 抬升门（必须是高轨迹）→ TALL 下降一路还回地面。抬升门只出现这一次，而且前面必须先在 HIGH 斜线上待过，所以「要跳多高」这件事是被前面教出来的。"
+parameters = {
+"speed": 170.0,
+"patterns": [
+{"kind": "RISE", "shape": "TALL", "start": 1.0},
+{"kind": "GATE", "safe": "LOW", "breath": 0.00},
+{"kind": "FALL", "shape": "TALL", "breath": 0.00},
+{"kind": "RISE", "shape": "SHORT", "breath": 0.06},
+{"kind": "GATE", "safe": "LOW", "breath": 0.00},
+{"kind": "FALL", "shape": "SHORT", "breath": 0.00},
+{"kind": "RISE", "shape": "HIGH", "breath": 0.06},
+{"kind": "GATE", "safe": "HIGH", "breath": 0.00},
+{"kind": "FALL", "shape": "TALL", "breath": 0.00}
+]
+}

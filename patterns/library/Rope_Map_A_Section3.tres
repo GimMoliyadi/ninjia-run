@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=8 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave05_LongSpike.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave08_RowSpike.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave09_ReverseRow.tres" id="4"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave10_Finale.tres" id="5"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave11_Exit.tres" id="6"]
+
+[resource]
+script = ExtResource("1")
+section_name = "Rope_Map_A_Section3"
+display_name = "三 · 合拍与收势"
+stages = PackedStringArray("合拍 · 上侧刺镖同拍", "延拍 · 上侧合拍多守一拍", "反拍 · 下侧合拍回上绳", "终奏 · 双侧合拍，短答收势", "出口 · 金币收步")
+stage_entries = PackedInt32Array(1, 1, 1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6")])

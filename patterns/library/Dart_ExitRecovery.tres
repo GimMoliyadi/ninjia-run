@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RecoverySection" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+duration = 0.8
+recovery_label = "高潮后短出口"
+coin_count = 2

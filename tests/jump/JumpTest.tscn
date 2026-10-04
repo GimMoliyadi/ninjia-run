@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://tests/jump/jump_test.gd" id="1"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="2"]
+[ext_resource type="Script" path="res://dynamic_camera.gd" id="3"]
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(0.88, 0.94, 0.88, 1)
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+[node name="JumpTest" type="Node2D"]
+script = ExtResource("1")
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -2
+[node name="Color" type="ColorRect" parent="Background"]
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.86, 0.92, 0.82, 1)
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(140, 460)
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("3")
+target = NodePath("../Player")
+[node name="HUD" type="CanvasLayer" parent="."]
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_left = 12.0
+offset_top = 396.0
+offset_right = 948.0
+theme_override_styles/panel = SubResource("Panel")
+[node name="Rows" type="VBoxContainer" parent="HUD/Panel"]
+[node name="Controls" type="HBoxContainer" parent="HUD/Panel/Rows"]
+theme_override_constants/separation = 12
+[node name="Case" type="OptionButton" parent="HUD/Panel/Rows/Controls"]
+focus_mode = 0
+custom_minimum_size = Vector2(220, 30)
+[node name="Start" type="Button" parent="HUD/Panel/Rows/Controls"]
+focus_mode = 0
+text = "开始 / 暂停 Enter"
+[node name="Restart" type="Button" parent="HUD/Panel/Rows/Controls"]
+focus_mode = 0
+text = "重开 R"
+[node name="Next" type="Button" parent="HUD/Panel/Rows/Controls"]
+focus_mode = 0
+text = "下一项 ]"
+[node name="Instruction" type="Label" parent="HUD/Panel/Rows"]
+theme_override_colors/font_color = Color(0.12, 0.22, 0.18, 1)
+theme_override_font_sizes/font_size = 15
+[node name="Status" type="Label" parent="HUD/Panel/Rows"]
+theme_override_colors/font_color = Color(0.12, 0.22, 0.18, 1)
+theme_override_font_sizes/font_size = 14

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave08_Climax"
+display_name = "六台终桥 · 三招前后呼应"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 9.05
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "前三台依次落稳滑铲、跳过低镖后站稳、跳过低镖再落台滑铲；后三台换高低落点重演这三招，第五台仍可直立站稳，最后宽台完成跳铲组合后出桥。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.5500, "pattern": "landing_slide", "width": 400.0, "height": 80.0},
+{"beat": 1.8750, "pattern": "vault", "width": 440.0, "height": 95.0},
+{"beat": 3.3000, "pattern": "vault_slide", "width": 400.0, "height": 80.0},
+{"beat": 4.6250, "pattern": "landing_slide", "width": 400.0, "height": 95.0},
+{"beat": 5.9500, "pattern": "vault", "width": 440.0, "height": 80.0},
+{"beat": 7.3750, "pattern": "vault_slide", "width": 440.0, "height": 80.0}
+]}

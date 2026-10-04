@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Scene2_AirRead"
+display_name = "单飞镖加强（P30）"
+template = "P30"
+difficulty = 2
+duration = 3.2
+length = 1700.0
+start_delay = 0.3
+instruction = "Vary+Escalate：仍然只用单飞镖，六拍间隔依次缩短，低位起跳、高位限制与齐胸读位交替，形成落地后马上再次判断的第一层压迫"
+supports_mirror = true
+parameters = {"speed": 215.0, "darts": [{"height": 8.0, "delay": 0.0, "distance": 500.0}, {"height": 165.0, "delay": 0.78, "distance": 500.0}, {"height": 74.0, "delay": 1.5, "distance": 500.0}, {"height": 8.0, "delay": 2.16, "distance": 500.0}, {"height": 165.0, "delay": 2.76, "distance": 500.0}, {"height": 74.0, "delay": 3.32, "distance": 500.0}]}
+tags = PackedStringArray("dart_wave", "wave_2", "vary", "escalate")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave05_LongSpike"
+display_name = "合拍 · 上侧刺镖同拍"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 4.7
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Introduce")
+instruction = "呼吸后从上绳续接熟悉的上—下—上短句。只给中拍的上侧地刺叠加同侧两枚镖，另一侧保持开放：首组下侧末枚通过后翻下，等刺尾与上侧末枚都通过，再在空白里翻回上绳。刺宽不增加。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4},
+{"beat":2.0,"kind":"mixed_flip","safe_side":1,"count":2,"rows":1,"spacing":0.4,"width_ratio":1.0},
+{"beat":3.4,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4}
+]}

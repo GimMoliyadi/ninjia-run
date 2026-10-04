@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg6_SlideToJump"
+display_name = "第6段 · 再压一拍，挑高后收身"
+template = "DART_WAVE"
+difficulty = 3
+duration = 1.6
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Vary")
+instruction = "横排结束后重新站稳，看到低位首枚再压一次；后两枚挑高、回到高位，沿地面通过即可。保留上一组到这一组的干净间隔，不把三连横排和新低镖硬塞进同一铲。挑高线收住后接下一段的低位双镖，不再留长空跑，也不把高镖写成必须二跳。"
+parameters = {
+"speed": 190.0,
+"patterns": [
+{"kind": "CROWN", "start_px": 242.5}
+]
+}

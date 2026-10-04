@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "P08_HighLow"
+display_name = "跳刺后急降"
+template = "P08"
+instruction = "先跳过地刺，再按下急降，避开上方横梁"
+parameters = {"spike_width": 24.0, "position": 520.0, "ceiling_clearance": 100.0}
+supports_mirror = false
+supports_speed = false

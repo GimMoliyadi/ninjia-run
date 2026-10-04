@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Scene3_GapWall"
+display_name = "换位飞镖墙加强（P17）"
+template = "P17"
+difficulty = 3
+duration = 3.5
+length = 1750.0
+start_delay = 0.0
+instruction = "Vary+Escalate：六堵墙由两次中缝确认进入高低换位，间隔比上一波更短，要求落地后立刻读取下一道安全口"
+supports_mirror = true
+supports_reverse = true
+parameters = {"wall_count": 6, "wall_interval": 1.05, "gap_positions": [120.0, 120.0, 165.0, 105.0, 165.0, 105.0], "wall_speed": 210.0, "gap_size": 158.0, "spawn_distance": 460.0}
+tags = PackedStringArray("dart_wave", "wave_4", "vary", "escalate")

@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://player.gd" id="1_script"]
+[ext_resource type="Script" path="res://visuals/player_visual.gd" id="2_visual"]
+[ext_resource type="Script" path="res://visuals/ninja_body.gd" id="3_body"]
+[ext_resource type="Script" path="res://visuals/scarf.gd" id="4_scarf"]
+[ext_resource type="Script" path="res://visuals/ghost_spawner.gd" id="5_ghost"]
+[ext_resource type="Script" path="res://visuals/health_bar.gd" id="6_health"]
+[ext_resource type="Script" path="res://visuals/sword.gd" id="7_sword"]
+[ext_resource type="PackedScene" path="res://visuals/run_skeleton.tscn" id="8_run"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(46, 66)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rope_detector"]
+size = Vector2(36, 72)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_script")
+floor_snap_length = 12.0
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -33)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="RopeDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitoring = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RopeDetector"]
+position = Vector2(0, -36)
+shape = SubResource("RectangleShape2D_rope_detector")
+
+[node name="PlayerVisual" type="Node2D" parent="."]
+script = ExtResource("2_visual")
+
+[node name="Orientation" type="Node2D" parent="PlayerVisual"]
+
+[node name="ActionPivot" type="Node2D" parent="PlayerVisual/Orientation"]
+
+[node name="Body" type="Node2D" parent="PlayerVisual/Orientation/ActionPivot"]
+script = ExtResource("3_body")
+
+[node name="RunSkeleton" parent="PlayerVisual/Orientation/ActionPivot/Body" instance=ExtResource("8_run")]
+
+[node name="Neck" type="Marker2D" parent="PlayerVisual/Orientation/ActionPivot/Body"]
+position = Vector2(5, -49)
+
+[node name="Sword" type="Node2D" parent="PlayerVisual/Orientation/ActionPivot/Body"]
+script = ExtResource("7_sword")
+
+[node name="HealthBar" type="Node2D" parent="."]
+script = ExtResource("6_health")
+
+[node name="Scarf" type="Line2D" parent="PlayerVisual/Orientation/ActionPivot/Body/Neck"]
+script = ExtResource("4_scarf")
+
+[node name="GhostSpawner" type="Node2D" parent="PlayerVisual"]
+script = ExtResource("5_ghost")
+
+[node name="RunDust" type="CPUParticles2D" parent="PlayerVisual"]
+position = Vector2(-12, -2)
+emitting = false
+amount = 12
+lifetime = 0.35
+local_coords = false
+direction = Vector2(-1, -0.3)
+spread = 20.0
+gravity = Vector2(0, 60)
+initial_velocity_min = 25.0
+initial_velocity_max = 65.0
+scale_amount_min = 1.0
+scale_amount_max = 2.5
+color = Color(0.08, 0.08, 0.08, 0.35)

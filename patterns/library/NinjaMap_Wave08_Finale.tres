@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "NinjaMap_Wave08_Finale"
+display_name = "破阵 · 高低双回合"
+template = "NINJA_WAVE"
+difficulty = 4
+duration = 6.3
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("NINJA", "SPIKE", "Finale")
+instruction = "先越过高台守卫，把空中路线带过后方短刺；落地后接地面忍者与第二座低台，最后越刺收阵。两次高低回合呼应前面学过的动作，出阵后再领金币。"
+parameters = {"gates": [
+{"beat":1.5,"kind":"high","spawn_beat":0.1,"platform_height":100.0},
+{"beat":2.3,"kind":"spike"},
+{"beat":3.4,"kind":"low","spawn_beat":1.4},
+{"beat":4.3,"kind":"high","spawn_beat":1.62,"platform_height":70.0},
+{"beat":5.4,"kind":"spike"}
+]}

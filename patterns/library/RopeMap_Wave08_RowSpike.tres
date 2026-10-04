@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave08_RowSpike"
+display_name = "延拍 · 上侧合拍多守一拍"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 5.1
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Escalate")
+instruction = "封锁侧、刺宽和翻面次数都不变，只把中拍的上侧合拍延长到三枚镖。翻到下绳后多守一拍，不能见刺尾就回上；等第三枚也通过，再利用完整空白翻上。末组随持拍长度后移，不挤占换侧距离。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4},
+{"beat":2.0,"kind":"mixed_flip","safe_side":1,"count":3,"rows":1,"spacing":0.4,"width_ratio":1.0},
+{"beat":3.8,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4}
+]}

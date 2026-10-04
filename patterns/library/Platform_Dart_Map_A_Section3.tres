@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=6 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/PlatformDart_Wave07_Weave.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/PlatformDart_Wave08_Climax.tres" id="3"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="RecoveryScript"]
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("RecoveryScript")
+duration = 1.4
+coin_count = 0
+recovery_label = "出桥 · 落稳接续下一地图"
+[resource]
+script = ExtResource("1")
+section_name = "Platform_Dart_Map_A_Section3"
+display_name = "三 · 五台回旋与六台呼应"
+stages = PackedStringArray("五台回旋 · 下阶换气再登高", "六台终桥 · 三招前后呼应", "出桥 · 落稳接续下一地图")
+stage_entries = PackedInt32Array(1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), SubResource("Recovery")])

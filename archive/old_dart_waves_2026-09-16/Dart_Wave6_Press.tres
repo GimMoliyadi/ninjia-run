@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave6_Press"
+display_name = "三种解法连续题"
+template = "DART_WAVE"
+difficulty = 1
+duration = 16.0
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Escalate")
+instruction = "三题连做，每一题的解法都不同，中间没有喘息的空档。第一题（跳）：低位双镖 → 抬升门，刚起跳就要改判成「抬到 207 以上」，之后 TALL 下降收尾。第二题（滑）：DEEP 下降斜线（200→152→66）的终点正好是滑铲高度 → 低位门，滑铲是斜线给出来的，不是突然要求。第三题（延迟二跳）：SHORT 升 → 延迟二跳 → 抬升门，逼玩家不要在下降途中把二段跳提前用掉。三道门的高度各不相同（抬升 / 滑铲 / 抬升），但中间隔了两种斜线，所以不会读成门廊。"
+parameters = {
+"speed": 170.0,
+"patterns": [
+{"kind": "HINT", "count": 2, "start": 1.0},
+{"kind": "GATE", "safe": "HIGH", "breath": 0.00},
+{"kind": "FALL", "shape": "TALL", "breath": 0.00},
+{"kind": "FALL", "shape": "DEEP", "breath": 0.00},
+{"kind": "GATE", "safe": "LOW", "breath": 0.00},
+{"kind": "RISE", "shape": "SHORT", "breath": 0.06},
+{"kind": "DELAYED", "breath": 0.00},
+{"kind": "GATE", "safe": "HIGH", "breath": 0.00},
+{"kind": "FALL", "shape": "HIGH", "breath": 0.00}
+]
+}

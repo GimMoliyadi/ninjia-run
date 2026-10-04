@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P18_Diagonal"
+display_name = "斜线飞镖阵"
+template = "P18"
+instruction = "斜线飞镖：观察排列方向，保持可用高度"
+supports_mirror = true
+supports_reverse = true
+parameters = {"count": 5, "spawn_distance": 650.0, "x_spacing": 45.0, "height": 85.0, "height_step": 30.0, "speed": 240.0}

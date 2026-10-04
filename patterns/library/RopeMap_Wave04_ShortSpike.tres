@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave04_ShortSpike"
+display_name = "识刺 · 中拍上侧地刺"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 4.7
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Introduce")
+instruction = "上—下—上的路线与上一句一致，只把中拍的上侧镖串换成单处地刺。下侧末枚镖通过后翻下，保持在下绳越过整段刺宽；确认刺尾通过，再在空白里翻回上绳接最后的下侧短串。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4},
+{"beat":2.0,"kind":"spikes","safe_side":1,"width_ratio":1.0},
+{"beat":3.4,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4}
+]}

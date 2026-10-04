@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg7_Breath2"
+display_name = "第7段 · 低双回拍，折返起势"
+template = "DART_WAVE"
+difficulty = 2
+duration = 0.7
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Repeat")
+instruction = "挑高线刚收住，低位双镖就回到眼前，沿用前半段学过的一次滑铲。滑铲结束后，高潮先给两枚可站过的高镖，再折返落低；把这组低双当作进入高潮的拍点，不另插长空跑。下一组低镖已留出重新判断的间隔，不要求把两组并成一铲。"
+parameters = {
+"speed": 195.0,
+"patterns": [
+{"kind": "LOW_PAIR", "start_px": 0.0}
+]
+}

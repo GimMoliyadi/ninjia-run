@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P16_BottomGap"
+display_name = "低位安全口飞镖墙"
+template = "P16"
+instruction = "下方安全口：保持低位或急降"
+supports_mirror = true
+parameters = {"safe_gap_position": 40.0, "safe_gap_size": 116.0, "wall_speed": 240.0, "spawn_distance": 650.0}

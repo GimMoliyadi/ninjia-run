@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://tests/rig_action_chain.gd" id="1_preview"]
+[ext_resource type="PackedScene" path="res://visuals/rig_v2/visual_root_v2.tscn" id="2_rig"]
+
+[node name="RigActionChain" type="Node2D"]
+script = ExtResource("1_preview")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -1000
+offset_right = 960.0
+offset_bottom = 540.0
+mouse_filter = 2
+color = Color(0.19, 0.21, 0.23, 1)
+
+[node name="FloorLine" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(50, 500, 910, 500)
+width = 2.0
+default_color = Color(0.68, 0.7, 0.69, 1)
+
+[node name="Stage" type="Node2D" parent="."]
+position = Vector2(480, 500)
+scale = Vector2(3.5, 3.5)
+
+[node name="RopeLine" type="Line2D" parent="Stage"]
+visible = false
+z_index = -1
+points = PackedVector2Array(-100, 0, 100, 0)
+width = 1.0
+default_color = Color(0.84, 0.7, 0.44, 1)
+
+[node name="PreviewVisual" type="Node2D" parent="Stage"]
+
+[node name="Orientation" type="Node2D" parent="Stage/PreviewVisual"]
+
+[node name="ActionPivot" type="Node2D" parent="Stage/PreviewVisual/Orientation"]
+
+[node name="VisualRoot_V2" parent="Stage/PreviewVisual/Orientation/ActionPivot" instance=ExtResource("2_rig")]
+
+[node name="Status" type="Label" parent="."]
+z_index = 1000
+offset_left = 20.0
+offset_top = 12.0
+offset_right = 940.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 20
+text = "V2 完整动作链"
+
+[node name="Instructions" type="Label" parent="."]
+z_index = 1000
+offset_left = 20.0
+offset_top = 48.0
+offset_right = 940.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 16
+text = "空格：暂停/恢复（姿态及升降一起冻结）　R：从待机重播"
+
+[node name="Scope" type="Label" parent="."]
+z_index = 1000
+offset_left = 20.0
+offset_top = 78.0
+offset_right = 940.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 14
+text = "仅视觉预览：跑跳落地 → 二段翻滚 → 滑铲 → 绳索上下翻转；不运行角色物理。"

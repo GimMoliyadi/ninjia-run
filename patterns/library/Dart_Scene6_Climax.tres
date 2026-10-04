@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Scene6_Climax"
+display_name = "高潮追击双镖（P30）"
+template = "P30"
+difficulty = 3
+duration = 1.8
+length = 1200.0
+start_delay = 0.3
+instruction = "Escalate：换位墙后用两枚连续贴地飞镖逼出一次明确跳跃，保持高潮连续性并承接最后一堵墙"
+supports_mirror = true
+parameters = {"speed": 230.0, "darts": [{"height": 8.0, "delay": 0.0, "distance": 380.0}, {"height": 8.0, "delay": 0.55, "distance": 380.0}]}
+tags = PackedStringArray("dart_wave", "wave_5", "escalate")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://components/map_module_chunk.gd" id="1"]
+[node name="SegmentNinjaMap" type="Node2D"]
+script = ExtResource("1")
+module_data_path = "res://patterns/library/Ninja_Map_A.tres"
+[node name="Entry" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+[node name="Exit" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+[node name="Hint" type="Label" parent="."]
+text = "影袭 · 追风：双影、短刺、三人横阵、高低守位；靠近忍者会触发挥刀"

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg1_Entry"
+display_name = "第1段 · 低位三拍，读线回落"
+template = "DART_WAVE"
+difficulty = 1
+duration = 3.033
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Introduce / Repeat")
+instruction = "先用一次滑铲接住低位双镖与上升线的首枚，三枚低镖是同一个动作；后两枚抬高，沿地面通过即可。随后看着下降线回到低位，再起一铲，并把这一铲继续带进下一段的低位双镖。中、高位镖站着能过，用来提示线条走向，不要求二段跳，也不要见镖就连按跳跃。"
+parameters = {
+"speed": 150.0,
+"patterns": [
+{"kind": "LOW_PAIR", "start_px": 320.0},
+{"kind": "RISE", "gap_px": 115.0},
+{"kind": "FALL", "gap_px": 115.0}
+]
+}

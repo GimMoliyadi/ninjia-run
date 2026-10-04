@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://components/rope_map_chunk.gd" id="1"]
+[node name="SegmentRopeMap" type="Node2D"]
+script = ExtResource("1")
+module_data_path = "res://patterns/library/Rope_Map_A.tres"
+[node name="Entry" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+[node name="Exit" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+[node name="Hint" type="Label" parent="."]
+text = "悬丝 · 回风：跟着飞镖波浪上下翻面；横排封住一侧时切到另一侧"

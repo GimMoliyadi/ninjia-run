@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave01_RiseFlip"
+display_name = "初识 · 下侧来镖，留上绳"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 2.6
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Introduce")
+instruction = "下侧两枚同高飞镖组成一个短串，上侧始终畅通。先留在上绳，看清封锁侧；本拍不用翻面，等末枚飞镖通过后再读下一拍。"
+parameters = {"gates": [
+{"beat":1.2,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4}
+]}

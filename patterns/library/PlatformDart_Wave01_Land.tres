@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave01_Land"
+display_name = "三台识招 · 铲、跳、再铲"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 5.65
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "第一台落稳后滑铲过台尾高镖；跨坑跳过低镖，第二台没有台尾镖，可以站稳；再跳到第三台，落稳后滑铲收尾。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.6000, "pattern": "landing_slide", "width": 440.0, "height": 70.0},
+{"beat": 2.2500, "pattern": "vault", "width": 480.0, "height": 70.0},
+{"beat": 4.0000, "pattern": "landing_slide", "width": 440.0, "height": 70.0}
+]}

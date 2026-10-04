@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="Script" path="res://patterns/test/pattern_test.gd" id="1"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="2"]
+[ext_resource type="Script" path="res://dynamic_camera.gd" id="3"]
+[sub_resource type="StyleBoxFlat" id="Panel"]
+bg_color = Color(0.9, 0.95, 0.89, 0.95)
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+[node name="PatternTest" type="Node2D"]
+script = ExtResource("1")
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -2
+[node name="Color" type="ColorRect" parent="Background"]
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.86, 0.92, 0.82, 1)
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(140, 460)
+[node name="DynamicCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("3")
+target = NodePath("../Player")
+[node name="HUD" type="CanvasLayer" parent="."]
+[node name="Panel" type="PanelContainer" parent="HUD"]
+offset_left = 12.0
+offset_top = 380.0
+offset_right = 948.0
+theme_override_styles/panel = SubResource("Panel")
+[node name="Rows" type="VBoxContainer" parent="HUD/Panel"]
+theme_override_colors/font_color = Color(0.12, 0.2, 0.2, 1)
+[node name="Selectors" type="HBoxContainer" parent="HUD/Panel/Rows"]
+theme_override_constants/separation = 12
+[node name="Pattern" type="OptionButton" parent="HUD/Panel/Rows/Selectors"]
+focus_mode = 0
+custom_minimum_size = Vector2(280, 32)
+[node name="Difficulty" type="OptionButton" parent="HUD/Panel/Rows/Selectors"]
+focus_mode = 0
+[node name="Modifier" type="OptionButton" parent="HUD/Panel/Rows/Selectors"]
+focus_mode = 0
+[node name="Buttons" type="HBoxContainer" parent="HUD/Panel/Rows"]
+[node name="Previous" type="Button" parent="HUD/Panel/Rows/Buttons"]
+text = "上一个 [ / PgUp"
+focus_mode = 0
+[node name="Restart" type="Button" parent="HUD/Panel/Rows/Buttons"]
+text = "重开 R"
+focus_mode = 0
+[node name="Next" type="Button" parent="HUD/Panel/Rows/Buttons"]
+text = "下一个 ] / PgDn"
+focus_mode = 0
+[node name="Debug" type="CheckButton" parent="HUD/Panel/Rows/Buttons"]
+theme_override_colors/font_color = Color(0.13, 0.22, 0.2, 1)
+text = "预览 F1"
+button_pressed = true
+focus_mode = 0
+[node name="Instruction" type="Label" parent="HUD/Panel/Rows"]
+theme_override_colors/font_color = Color(0.13, 0.22, 0.2, 1)
+[node name="Status" type="Label" parent="HUD/Panel/Rows"]
+theme_override_colors/font_color = Color(0.18, 0.25, 0.25, 1)
+theme_override_font_sizes/font_size = 14
+[node name="Help" type="Label" parent="HUD"]
+offset_left = 20.0
+offset_top = 352.0
+theme_override_colors/font_color = Color(0.94, 0.97, 0.9, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.2, 0.15, 1)
+theme_override_constants/outline_size = 3
+text = "Space 跳跃/二段跳 · S 急降/滑铲 · P 暂停 · R 重开 · [ / ] 切换 · F1 预览"

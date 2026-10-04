@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "NinjaMap_Wave03_Pressure"
+display_name = "紧步 · 低高追拍"
+template = "NINJA_WAVE"
+difficulty = 2
+duration = 8.5
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("NINJA", "STATIONARY", "Pressure")
+instruction = "五名忍者连续落地，保持跳跃节奏或用武器逐个清除。"
+parameters = {"gates": [
+{"beat":1.2,"kind":"low"},
+{"beat":2.7,"kind":"high"},
+{"beat":4.2,"kind":"low"},
+{"beat":5.7,"kind":"high"},
+{"beat":7.2,"kind":"low"}
+]}

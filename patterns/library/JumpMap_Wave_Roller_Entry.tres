@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave_Roller_Entry"
+display_name = "刃轮入阵 · 越轮穿梁"
+template = "ACTION_PHRASE"
+difficulty = 1
+duration = 6.5
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "SLIDE", "ROLLER", "Introduce", "Repeat")
+instruction = "先跳过迎面刃轮，落地后压低穿过短悬梁；第二轮重复同一节奏。刃轮可跳过，也可用技能击碎。"
+parameters = {"actions": [
+{"kind": "roller", "beat": 1.6},
+{"kind": "slide", "beat": 3.0},
+{"kind": "roller", "beat": 4.3},
+{"kind": "slide", "beat": 5.65}
+]}

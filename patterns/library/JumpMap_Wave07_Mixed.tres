@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave07_Mixed"
+display_name = "高低断桥 · 连踏碎台"
+template = "JUMP_WAVE"
+difficulty = 1
+duration = 4.5
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "Pits", "Timing")
+instruction = "落脚点低、高、中、高、低交替；中段碎台下方不再有地面，最宽的上升空档留给二段跳。末台恢复稳定，准备下一段。"
+parameters = {"phrases": [
+{"beat": 0.3, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.45},
+{"beat": 1.0, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.70},
+{"beat": 1.875, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.55, "crumble_delay_ratio": 0.8, "crumble_over_pit": true},
+{"beat": 2.975, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.85, "crumble_delay_ratio": 0.8, "crumble_over_pit": true},
+{"beat": 3.825, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.45}
+]}

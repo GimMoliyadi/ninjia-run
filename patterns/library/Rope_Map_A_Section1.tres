@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=5 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave01_RiseFlip.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave02_FallFlip.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/RopeMap_Wave07_TopRow.tres" id="4"]
+
+[resource]
+script = ExtResource("1")
+section_name = "Rope_Map_A_Section1"
+display_name = "一 · 避让与换侧"
+stages = PackedStringArray("初识 · 下侧来镖，留上绳", "复习 · 下侧再来，守上绳", "换侧 · 先下后上")
+stage_entries = PackedInt32Array(1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4")])

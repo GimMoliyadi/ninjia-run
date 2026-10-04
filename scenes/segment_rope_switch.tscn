@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://components/chunk.gd" id="1_chunk"]
+[ext_resource type="PackedScene" path="res://scenes/Coin.tscn" id="2_coin"]
+[ext_resource type="PackedScene" path="res://scenes/Spike.tscn" id="3_spike"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(400, 80)
+
+[sub_resource type="RectangleShape2D" id="RopeShape"]
+size = Vector2(1800, 14)
+
+[node name="SegmentRopeSwitch" type="Node2D"]
+script = ExtResource("1_chunk")
+
+[node name="Entry" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+
+[node name="Exit" type="Marker2D" parent="."]
+position = Vector2(2600, 460)
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 460, 400, 460, 400, 540, 0, 540)
+color = Color(0.152941, 0.235294, 0.172549, 1)
+
+[node name="GroundLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 460, 400, 460)
+width = 8.0
+default_color = Color(0.145098, 0.145098, 0.180392, 1)
+
+[node name="GroundBody" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundBody"]
+position = Vector2(200, 500)
+shape = SubResource("GroundShape")
+
+[node name="Rope" type="Area2D" parent="." groups=["rope"]]
+position = Vector2(1300, 460)
+collision_layer = 2
+collision_mask = 0
+monitoring = true
+
+[node name="Line" type="Line2D" parent="Rope"]
+points = PackedVector2Array(-900, 0, 900, 0)
+width = 8.0
+default_color = Color(0.823529, 0.654902, 0.286275, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rope"]
+shape = SubResource("RopeShape")
+
+[node name="SpikeA" parent="Rope" instance=ExtResource("3_spike")]
+position = Vector2(-500, 0)
+
+[node name="SpikeB" parent="Rope" instance=ExtResource("3_spike")]
+position = Vector2(0, 0)
+scale = Vector2(1, -1)
+
+[node name="SpikeC" parent="Rope" instance=ExtResource("3_spike")]
+position = Vector2(500, 0)
+
+[node name="CoinA" parent="." instance=ExtResource("2_coin")]
+position = Vector2(560, 420)
+
+[node name="CoinB" parent="." instance=ExtResource("2_coin")]
+position = Vector2(760, 495)
+
+[node name="CoinC" parent="." instance=ExtResource("2_coin")]
+position = Vector2(1200, 420)
+
+[node name="CoinD" parent="." instance=ExtResource("2_coin")]
+position = Vector2(1420, 420)
+
+[node name="CoinE" parent="." instance=ExtResource("2_coin")]
+position = Vector2(1780, 495)
+
+[node name="CoinF" parent="." instance=ExtResource("2_coin")]
+position = Vector2(2040, 420)
+
+[node name="ExitGround" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(2200, 460, 2600, 460, 2600, 540, 2200, 540)
+color = Color(0.152941, 0.235294, 0.172549, 1)
+
+[node name="ExitGroundLine" type="Line2D" parent="."]
+points = PackedVector2Array(2200, 460, 2600, 460)
+width = 8.0
+default_color = Color(0.145098, 0.145098, 0.180392, 1)
+
+[node name="ExitCollision" type="CollisionShape2D" parent="GroundBody"]
+position = Vector2(2400, 500)
+shape = SubResource("GroundShape")
+
+[node name="Hint" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 220.0
+theme_override_colors/font_color = Color(0.15, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 24
+text = "10  翻绳 · 下 → 上 → 下 → 上"
+
+[node name="SpikeD" parent="Rope" instance=ExtResource("3_spike")]
+position = Vector2(750, 0)
+scale = Vector2(1, -1)

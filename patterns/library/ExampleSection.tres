@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=5 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/P01_SingleSpike.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/P08_HighLow.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/Recovery.tres" id="4"]
+[resource]
+script = ExtResource("1")
+entries = Array[Resource]([ExtResource("2"), ExtResource("4"), ExtResource("3"), ExtResource("4")])

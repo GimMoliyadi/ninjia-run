@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave09_ReverseRow"
+display_name = "反拍 · 下侧合拍回上绳"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 3.7
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Vary")
+instruction = "把已学的合拍封锁侧反过来，收成两拍短答，不再完整重复三拍句。先避开上侧两枚镖挂到下绳；等末枚通过，在空白里翻上，避开随后下侧地刺与同侧三枚镖。保持在上绳等整组结束，准备终奏。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"darts","safe_side":1,"count":2,"rows":1,"spacing":0.4},
+{"beat":2.0,"kind":"mixed_flip","safe_side":0,"count":3,"rows":1,"spacing":0.4,"width_ratio":1.0}
+]}

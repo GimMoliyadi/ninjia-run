@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave3_Rush"
+display_name = "守卫与突破"
+template = "DART_WAVE"
+difficulty = 1
+duration = 13.0
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Escalate")
+instruction = "一条 TALL 上升斜线把玩家一路抬到中位（36→96→152→200）。到顶之后不是让他落回来，而是用 HIGH_LOW 高位封锁接住他：中位双镖此时正处在上升轨迹的顶点上，玩家必须立刻压住、不能再跳；随后低位双镖才轮到起跳。这是全地图第一次明确要求「爬到高处之后马上改判成低轨迹」。之后一条 SHORT 下降线把玩家送回地面，末尾用低位双镖收尾。"
+parameters = {
+"speed": 180.0,
+"patterns": [
+{"kind": "RISE", "shape": "TALL", "start": 0.8},
+{"kind": "HIGH_LOW", "breath": 0.00},
+{"kind": "FALL", "shape": "SHORT", "breath": 0.00},
+{"kind": "HINT", "count": 2, "breath": 0.08}
+]
+}

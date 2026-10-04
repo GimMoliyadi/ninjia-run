@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "NinjaMap_Wave01_Shadow"
+display_name = "初阵 · 双影占位"
+template = "NINJA_WAVE"
+difficulty = 1
+duration = 3.4
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("NINJA", "STATIONARY", "Introduce")
+instruction = "两名忍者先后跃入，先越过第一名，再读第二名；第二次落地便接后方的地刺换步，不用等一大段空地。"
+parameters = {"gates": [
+{"beat":1.75,"kind":"low","spawn_beat":0.1},
+{"beat":2.5,"kind":"high","spawn_beat":0.32}
+]}

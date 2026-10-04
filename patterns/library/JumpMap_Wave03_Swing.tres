@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave03_Swing"
+display_name = "地刺三 · 短落地再跳"
+template = "JUMP_WAVE"
+difficulty = 1
+duration = 1.6
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "Cadence")
+instruction = "第一组短刺后只留短落地区；落地后很快再次起跳，不能一跳越过两组。"
+parameters = {"phrases": [
+{"beat": 0.38, "pattern": "single_spike", "width_ratio": 2.4},
+{"beat": 1.05, "pattern": "single_spike", "width_ratio": 2.4}
+]}

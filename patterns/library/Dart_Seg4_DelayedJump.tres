@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg4_DelayedJump"
+display_name = "第4段 · 回落低镖接抬线"
+template = "DART_WAVE"
+difficulty = 2
+duration = 0.902
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Repeat")
+instruction = "上一段折返的末枚低镖与本段上升线首枚组成同一次滑铲，沿用上一铲即可，不在段边界重新起跳。线条随后抬到中、高位，等滑铲结束站回地面；这些高镖不是二段跳门。下一组同高横排才是新的低身动作。"
+parameters = {
+"speed": 180.0,
+"patterns": [
+{"kind": "RISE", "start_px": 20.0}
+]
+}

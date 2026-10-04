@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P15_TopGap"
+display_name = "高位安全口飞镖墙"
+template = "P15"
+instruction = "上方安全口：主动起跳进入高位"
+supports_mirror = true
+parameters = {"safe_gap_position": 165.0, "safe_gap_size": 116.0, "wall_speed": 240.0, "spawn_distance": 650.0}

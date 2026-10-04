@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=9 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave01_Pulse.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave02_Doubles.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave03_Swing.tres" id="4"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave04_Steps.tres" id="5"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave_Roller_Entry.tres" id="6"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="RecoveryScript"]
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("RecoveryScript")
+duration = 1.2
+coin_count = 6
+coin_spacing = 64.0
+recovery_label = "刃轮后 · 收势拾金"
+
+[resource]
+script = ExtResource("1")
+section_name = "Jump_Map_A_Section1"
+shuffle_prefix = 0
+display_name = "一 · 地刺与刃轮"
+stages = PackedStringArray("起拍 · 一跳越刺", "重复 · 稍宽刺带", "接拍 · 落地再起", "变拍 · 短长衔接", "刃轮入阵 · 越轮穿梁", "收势 · 落稳拾金")
+stage_entries = PackedInt32Array(1, 1, 1, 1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), SubResource("Recovery")])

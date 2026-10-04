@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MapModuleData" load_steps=5 format=3]
+[ext_resource type="Script" path="res://patterns/map_module_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/Rope_Map_A_Section1.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/Rope_Map_A_Section2.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/Rope_Map_A_Section3.tres" id="4"]
+[resource]
+script = ExtResource("1")
+module_id = "Rope_Map_A"
+display_name = "悬丝 · 回风"
+theme = "ROPE"
+variant = "A"
+difficulty = 1
+sections = Array[PatternSectionData]([ExtResource("2"), ExtResource("3"), ExtResource("4")])

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=8 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/Jump_Wave1_Basic.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/Jump_Wave2_Tighter.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/Jump_Recovery.tres" id="4"]
+[ext_resource type="Resource" path="res://patterns/library/Jump_Wave3_Syncopation.tres" id="5"]
+[ext_resource type="Resource" path="res://patterns/library/Jump_Wave4_Climax.tres" id="6"]
+[ext_resource type="Resource" path="res://patterns/library/Jump_ExitRecovery.tres" id="7"]
+[resource]
+script = ExtResource("1")
+section_name = "Jump_A"
+display_name = "单跳节奏训练"
+stages = PackedStringArray("Wave 1：基础单跳", "Wave 2：单跳加强", "短喘息", "Wave 3：节奏变化", "Wave 4：连续高潮", "短出口")
+stage_entries = PackedInt32Array(1, 1, 1, 1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5"), ExtResource("6"), ExtResource("7")])

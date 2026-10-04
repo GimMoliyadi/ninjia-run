@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MapModuleData" load_steps=6 format=3]
+[ext_resource type="Script" path="res://patterns/map_module_data.gd" id="1"]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="2"]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="3"]
+[sub_resource type="Resource" id="Phrase"]
+script = ExtResource("3")
+pattern_name = "JumpSlide"
+display_name = "越刺落地铲，再跳再压低"
+template = "ACTION_PHRASE"
+difficulty = 1
+duration = 5.0
+length = 2000.0
+start_delay = 0.0
+instruction = "跳越地刺，落地后滑铲低梁；保持跳、铲切换，不需要技能"
+parameters = {"actions": [{"kind": "spike", "beat": 0.8}, {"kind": "slide", "beat": 1.8}, {"kind": "spike", "beat": 2.8}, {"kind": "slide", "beat": 3.8}, {"kind": "spike", "beat": 4.6}]}
+[sub_resource type="Resource" id="Section"]
+script = ExtResource("2")
+section_name = "JumpSlidePhrase"
+display_name = "越刺与低身衔接"
+stages = PackedStringArray("Repeat：跳铲交替")
+stage_entries = PackedInt32Array(1)
+entries = Array[Resource]([SubResource("Phrase")])
+[resource]
+script = ExtResource("1")
+module_id = "Jump_Slide_Phrase"
+display_name = "越刺 · 压低 · 再起跳"
+theme = "MIXED"
+variant = "A"
+difficulty = 1
+sections = Array[PatternSectionData]([SubResource("Section")])

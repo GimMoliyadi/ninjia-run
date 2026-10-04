@@ -1,0 +1,138 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_menu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.055, 0.071, 0.094, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6, 0.72, 0.62, 0.55)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0, 0, 0, 0.32)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.7, 0.85, 0.62, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 30.0
+content_margin_right = 30.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.83, 0.94, 0.73, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 30.0
+content_margin_right = 30.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.11, 0.16, 0.16, 1)
+
+[node name="Accent" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 7.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.7, 0.85, 0.62, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(520, 330)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 38
+
+[node name="Content" type="VBoxContainer" parent="Center/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 17
+alignment = 1
+
+[node name="Eyebrow" type="Label" parent="Center/Panel/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 0.62, 1)
+theme_override_font_sizes/font_size = 16
+text = "NINJA RUN"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Center/Panel/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.96, 0.9, 1)
+theme_override_font_sizes/font_size = 48
+text = "水墨忍者"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Center/Panel/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.79, 0.75, 1)
+theme_override_font_sizes/font_size = 17
+text = "穿越障碍，踏上忍者之路"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="Center/Panel/Margin/Content"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="Center/Panel/Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.075, 0.12, 0.1, 1)
+theme_override_colors/font_hover_color = Color(0.075, 0.12, 0.1, 1)
+theme_override_colors/font_focus_color = Color(0.075, 0.12, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "开始游戏"
+
+[node name="Hint" type="Label" parent="Center/Panel/Margin/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.55, 0.62, 0.59, 1)
+theme_override_font_sizes/font_size = 14
+text = "点击按钮或按 Enter 开始"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Center/Panel/Margin/Content/StartButton" to="." method="_on_start_button_pressed"]

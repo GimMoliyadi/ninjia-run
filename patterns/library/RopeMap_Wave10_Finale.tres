@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave10_Finale"
+display_name = "终奏 · 双侧合拍，短答收势"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 6.4
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Escalate")
+instruction = "用已学的上下两侧合拍接成终奏，不增加刺宽或新高度：先挂下避上侧三镖与地刺，整组通过后翻上避下侧合拍。高潮后撤掉地刺，改成上侧单镖、下侧单镖两拍短答；每次都在前一整组危险带结束后的空白里换侧，最后留在上绳，接原有出口。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"mixed_flip","safe_side":1,"count":3,"rows":1,"spacing":0.4,"width_ratio":1.0},
+{"beat":2.4,"kind":"mixed_flip","safe_side":0,"count":3,"rows":1,"spacing":0.4,"width_ratio":1.0},
+{"beat":4.2,"kind":"darts","safe_side":1,"count":1,"rows":1,"spacing":0.4},
+{"beat":5.2,"kind":"darts","safe_side":0,"count":1,"rows":1,"spacing":0.4}
+]}

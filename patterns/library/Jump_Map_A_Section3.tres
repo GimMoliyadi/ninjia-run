@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=7 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave07_Mixed.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/JumpMap_Wave08_Climax.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/NinjaMap_Wave03_Pressure.tres" id="4"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="RecoveryScript"]
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("RecoveryScript")
+duration = 1.0
+coin_count = 7
+coin_spacing = 56.0
+recovery_label = "坑后追击 · 短金币缓冲"
+
+[resource]
+script = ExtResource("1")
+section_name = "Jump_Map_A_Section3"
+display_name = "三 · 坑与飞镖"
+stages = PackedStringArray("高低断桥 · 连踏碎台", "坑 + 飞镖 · 低轨迹延迟二跳", "紧步 · 落地后追击", "坑后追击 · 短金币缓冲")
+stage_entries = PackedInt32Array(1, 1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4"), SubResource("Recovery")])

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg8_Climax"
+display_name = "第8段 · 折返回声，横排收阵"
+template = "DART_WAVE"
+difficulty = 3
+duration = 3.858
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Escalate")
+instruction = "先复现中段的折返落低接上升起拍，这次上升线挑得更高：两枚低镖用同一铲接住，高镖沿地面让过。接着复现低位双镖加挑高回落，最后用一次滑铲通过同高三连横排。三组动作之间都能重新站稳；高潮来自熟悉形状的接续与高度呼应，不是加速或连续二跳。横排之后只留短收势，再接下一张完整地图。"
+parameters = {
+"speed": 200.0,
+"patterns": [
+{"kind": "HOOK", "start_px": 0.0},
+{"kind": "CROWN", "gap_px": 104.0},
+{"kind": "LIFTED_PAIR", "gap_px": 175.0},
+{"kind": "SLIDE_ROW", "gap_px": 180.0}
+]
+}

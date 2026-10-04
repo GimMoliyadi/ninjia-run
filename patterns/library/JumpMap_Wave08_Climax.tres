@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave08_Climax"
+display_name = "坑 + 飞镖 · 延迟二段跳"
+template = "P22"
+difficulty = 1
+duration = 2.0
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "Pits", "DART")
+instruction = "坑宽约一段跳上限；顶部少量飞镖限制立刻二跳，推荐先低轨迹下落再晚触发二段跳。"
+parameters = {"position": 240.0, "pit_width": 190.0, "height": 190.0, "speed": 220.0}

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "NinjaMap_Wave07_Pursuit"
+display_name = "追风 · 三势连环"
+template = "NINJA_WAVE"
+difficulty = 4
+duration = 9.5
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("NINJA", "SPIKE", "Climax")
+instruction = "一列忍者依次落地，穿过中间地刺后接最后一名守卫。"
+parameters = {"gates": [
+{"beat":1.3,"kind":"low"},
+{"beat":2.7,"kind":"high"},
+{"beat":4.1,"kind":"low"},
+{"beat":5.5,"kind":"high"},
+{"beat":7,"kind":"spike"},
+{"beat":8.5,"kind":"low"}
+]}

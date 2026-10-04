@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://components/leaping_ninja.gd" id="1_ninja"]
+[ext_resource type="Script" path="res://visuals/ninja_body.gd" id="2_body"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(44, 60)
+
+[node name="LeapingNinja" type="Area2D"]
+script = ExtResource("1_ninja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+shape = SubResource("BodyShape")
+
+[node name="Body" type="Node2D" parent="."]
+scale = Vector2(-1, 0.9)
+script = ExtResource("2_body")
+
+[node name="Neck" type="Marker2D" parent="Body"]
+position = Vector2(5, -49)

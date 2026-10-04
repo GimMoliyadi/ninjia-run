@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave2_Weave"
+display_name = "升落斜线"
+template = "DART_WAVE"
+difficulty = 1
+duration = 13.5
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Vary")
+instruction = "四条斜线，但每一条的形状都不一样，读起来是四次不同的高度变化而不是同一条线来回摆。第一次用 TALL（36→96→152→200），跨满全程，是全地图最高的一次爬升；紧接着 DEEP 下降（200→152→66），最后落在胸口高度上——因为这条线的终点是滑铲层，玩家必须滑铲收尾，而不是跳。中间插一组贴地双镖，把「落下来之后马上要起跳」问一次。第二次用 SHORT 短升（36→82）先起个头，然后 HIGH 上升（152→200→300）把玩家一路推到接近天花板——这一段要求全程保持滞空，落地就撞。"
+parameters = {
+"speed": 150.0,
+"patterns": [
+{"kind": "RISE", "shape": "TALL", "start": 0.8},
+{"kind": "FALL", "shape": "DEEP", "breath": 0.00},
+{"kind": "HINT", "count": 2, "breath": 0.06},
+{"kind": "RISE", "shape": "SHORT", "breath": 0.00},
+{"kind": "RISE", "shape": "HIGH", "breath": 0.00},
+{"kind": "FALL", "shape": "TALL", "breath": 0.00}
+]
+}

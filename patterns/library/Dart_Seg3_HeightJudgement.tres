@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg3_HeightJudgement"
+display_name = "第3段 · 低双挑高，折返接拍"
+template = "DART_WAVE"
+difficulty = 2
+duration = 2.212
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Vary")
+instruction = "沿用刚才处理低位双镖的动作，变化只在后面的高度：高镖先挑到顶层，再回到中位；接着折返线从高处压回低位。挑高和中位镖均可站着通过，不必补二跳。等折返末枚真正落低再压身，把这一次滑铲带进下一段的上升线首枚，不在分段处停顿重做。"
+parameters = {
+"speed": 175.0,
+"patterns": [
+{"kind": "LIFTED_PAIR", "start_px": 110.0},
+{"kind": "HOOK", "gap_px": 115.0}
+]
+}

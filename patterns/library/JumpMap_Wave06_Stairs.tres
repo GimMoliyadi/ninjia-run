@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave06_Stairs"
+display_name = "柱子二 · 柱刺组合"
+template = "JUMP_WAVE"
+difficulty = 1
+duration = 2.5
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "Pillars", "Spikes")
+instruction = "柱子出口直接接地刺；随后先处理地刺，再把落点放到下一根柱子上。"
+parameters = {"phrases": [
+{"beat": 0.45, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.65},
+{"beat": 0.78, "pattern": "single_spike", "width_ratio": 1.35},
+{"beat": 1.55, "pattern": "single_spike", "width_ratio": 1.35},
+{"beat": 1.78, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.65}
+]}

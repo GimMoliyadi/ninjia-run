@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave04_Rise"
+display_name = "抬阶 · 铲后登高站稳"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 5.25
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "三台逐级升高：第一台铲过台尾高镖，第二台跳过坑中低镖再落稳滑铲；最后跳到最高宽台，这里没有台尾镖，先站稳再准备下阶。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.6000, "pattern": "landing_slide", "width": 400.0, "height": 70.0},
+{"beat": 2.0000, "pattern": "vault_slide", "width": 440.0, "height": 90.0},
+{"beat": 3.5000, "pattern": "vault", "width": 480.0, "height": 110.0}
+]}

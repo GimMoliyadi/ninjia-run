@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg2_Breath1"
+display_name = "第2段 · 接住低双，顺势收身"
+template = "DART_WAVE"
+difficulty = 1
+duration = 1.151
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Repeat")
+instruction = "承接上一段下降线末端的低镖，这两枚低镖仍属于同一次滑铲，不用在段边界重新按。随后两枚高镖可站着通过，等滑铲结束自然站回地面，读清下一组。这里用高位镖降低操作压力，不再把低位双镖隔在一大段空跑之后。"
+parameters = {
+"speed": 165.0,
+"patterns": [
+{"kind": "LOW_HIGH", "start_px": 20.0}
+]
+}

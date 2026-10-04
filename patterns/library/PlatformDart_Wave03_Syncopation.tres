@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave03_Syncopation"
+display_name = "长短台 · 合招后落稳再跳"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 6.75
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "长台滑铲后跨坑，短台落稳再铲；下一座宽台只有坑中低镖，落台后可以站稳；最后再接一次跳过低镖、落稳铲高镖，不必每台都连铲。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.6000, "pattern": "landing_slide", "width": 440.0, "height": 70.0},
+{"beat": 2.1500, "pattern": "vault_slide", "width": 360.0, "height": 70.0},
+{"beat": 3.5000, "pattern": "vault", "width": 480.0, "height": 70.0},
+{"beat": 5.1500, "pattern": "vault_slide", "width": 400.0, "height": 70.0}
+]}

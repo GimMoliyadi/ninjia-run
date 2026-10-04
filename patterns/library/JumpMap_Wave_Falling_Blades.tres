@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave_Falling_Blades"
+display_name = "悬刃读招 · 压低再登台"
+template = "ACTION_PHRASE"
+difficulty = 2
+duration = 6.8
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "SLIDE", "FALLING_BLADE", "Vary")
+instruction = "观察吊刃下方的危险带，在下落时压低通过；随后越刺、再穿落刃，最后落到矮台。吊链没有碰撞，不依赖技能通关。"
+parameters = {"actions": [
+{"kind": "falling_blade", "beat": 1.6},
+{"kind": "spike", "beat": 3.0, "width_ratio": 0.9},
+{"kind": "falling_blade", "beat": 4.4},
+{"kind": "platform", "beat": 5.8, "width_ratio": 2.6, "height_ratio": 0.35}
+]}

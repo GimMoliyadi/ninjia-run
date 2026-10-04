@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene1_Intro.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene2_AirRead.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene3_EntryToWall.tres" id="4"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene3_GapWall.tres" id="5"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Recovery.tres" id="6"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene4_HighGap.tres" id="7"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene5_Switch.tres" id="8"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene6_Climax.tres" id="9"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_Scene6_ClimaxWall.tres" id="10"]
+[ext_resource type="Resource" path="res://patterns/library/Dart_ExitRecovery.tres" id="11"]
+
+[resource]
+script = ExtResource("1")
+section_name = "Dart_Introduction"
+display_name = "飞镖关"
+stages = PackedStringArray("Wave 1：单飞镖潮", "Wave 2：单飞镖加强", "短喘息", "Wave 3：成排飞镖潮", "Wave 4：成排飞镖加强", "Wave 5：混合高潮", "短出口")
+stage_entries = PackedInt32Array(1, 1, 1, 1, 1, 4, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("6"), ExtResource("4"), ExtResource("5"), ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("11")])

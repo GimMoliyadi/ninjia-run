@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=7 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/PlatformDart_Wave04_Rise.tres" id="2"]
+[ext_resource type="Resource" path="res://patterns/library/PlatformDart_Wave05_Fall.tres" id="3"]
+[ext_resource type="Resource" path="res://patterns/library/PlatformDart_Wave06_Link.tres" id="4"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="RecoveryScript"]
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("RecoveryScript")
+duration = 1.4
+coin_count = 3
+recovery_label = "收势 · 峰台回落后换气"
+[resource]
+script = ExtResource("1")
+section_name = "Platform_Dart_Map_A_Section2"
+display_name = "二 · 升降短连与峰台合招"
+stages = PackedStringArray("抬阶 · 铲后登高站稳", "落阶 · 站稳一拍再压低", "折桥 · 峰台合招后回落", "收势 · 峰台回落后换气")
+stage_entries = PackedInt32Array(1, 1, 1, 1)
+entries = Array[Resource]([ExtResource("2"), ExtResource("3"), ExtResource("4"), SubResource("Recovery")])

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RecoverySection" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+duration = 1.2
+recovery_label = "短呼吸 · 回气"
+coin_count = 3

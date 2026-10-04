@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave8_Climax"
+display_name = "风切终阵"
+template = "DART_WAVE"
+difficulty = 1
+duration = 16.5
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Escalate")
+instruction = "高潮是一句最长的话，六种动作轮流出现，没有一次重复：低位双镖起跳 → TALL 上升把轨迹带到中位 → HIGH_LOW 高位封锁（中位双镖落在上升轨迹顶点上，必须立刻压住）→ HIGH 上升再把玩家推到接近天花板 → 抬升门（只有在这个高度才跳得过去）→ TALL 下降一路还回地面 → 延迟二跳 → DEEP 下降把终点落在滑铲层 → 低位门滑铲收尾。结尾滑门之后留一段明显空白，告诉玩家飞镖潮结束。"
+parameters = {
+"speed": 210.0,
+"patterns": [
+{"kind": "HINT", "count": 2, "start": 0.9},
+{"kind": "RISE", "shape": "TALL", "breath": 0.00},
+{"kind": "HIGH_LOW", "breath": 0.00},
+{"kind": "RISE", "shape": "HIGH", "breath": 0.00},
+{"kind": "GATE", "safe": "HIGH", "breath": 0.00},
+{"kind": "FALL", "shape": "TALL", "breath": 0.00},
+{"kind": "DELAYED", "breath": 0.00},
+{"kind": "FALL", "shape": "DEEP", "breath": 0.00},
+{"kind": "GATE", "safe": "LOW", "breath": 0.00}
+]
+}

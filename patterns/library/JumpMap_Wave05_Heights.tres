@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave05_Heights"
+display_name = "踏石识裂 · 稳台接碎台"
+template = "JUMP_WAVE"
+difficulty = 1
+duration = 2.8
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "Pillars", "Introduce")
+instruction = "先踩稳第一座石台，再认识两座踩后开裂的平台；看到裂纹后及时起跳。初次碎台下保留承接地面，不要求使用技能。"
+parameters = {"phrases": [
+{"beat": 0.4, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.5},
+{"beat": 1.2, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.5, "crumble_delay_ratio": 1.0, "crumble_over_pit": false},
+{"beat": 2.2, "pattern": "pillar", "width_ratio": 2.6, "height_ratio": 0.5, "crumble_delay_ratio": 1.0, "crumble_over_pit": false}
+]}

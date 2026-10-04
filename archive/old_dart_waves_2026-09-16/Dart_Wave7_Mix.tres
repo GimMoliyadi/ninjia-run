@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave7_Mix"
+display_name = "连续动作题"
+template = "DART_WAVE"
+difficulty = 1
+duration = 15.5
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Escalate")
+instruction = "三题连做，每一题都由斜线把动作带出来，而不是直接甩一道门。第一题（滑）：DEEP 下降（200→152→66）终点落在滑铲层 → 低位门，滑铲是斜线给出来的；滑铲一结束立刻接低位双镖起跳。第二题（延迟二跳）：SHORT 升 → 延迟二跳 → 抬升门，把二段跳的时机从「拿到就用」改成「留到第二组」。第三题（保持地面）：HIGH 上升（152→200→300）把玩家推到高位 → HIGH_LOW 高位封锁，中位双镖要求他立刻压住不要再跳 → SHORT 下降落地收尾。"
+parameters = {
+"speed": 190.0,
+"patterns": [
+{"kind": "FALL", "shape": "DEEP", "start": 0.9},
+{"kind": "GATE", "safe": "LOW", "breath": 0.00},
+{"kind": "HINT", "count": 2, "breath": 0.00},
+{"kind": "RISE", "shape": "SHORT", "breath": 0.06},
+{"kind": "DELAYED", "breath": 0.00},
+{"kind": "GATE", "safe": "HIGH", "breath": 0.00},
+{"kind": "RISE", "shape": "HIGH", "breath": 0.06},
+{"kind": "HIGH_LOW", "breath": 0.00},
+{"kind": "FALL", "shape": "SHORT", "breath": 0.00}
+]
+}

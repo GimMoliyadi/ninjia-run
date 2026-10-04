@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave07_Weave"
+display_name = "五台回旋 · 下阶换气再登高"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 8.35
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "前两台下阶接滑铲与跳铲组合，中间最低宽台只需跳过坑中低镖，落稳后可以直立；后两台重新登高，先铲台尾、再以跳过低镖接落台滑铲收束。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.6000, "pattern": "landing_slide", "width": 440.0, "height": 100.0},
+{"beat": 2.1625, "pattern": "vault_slide", "width": 400.0, "height": 80.0},
+{"beat": 3.6250, "pattern": "vault", "width": 480.0, "height": 60.0},
+{"beat": 5.2875, "pattern": "landing_slide", "width": 400.0, "height": 80.0},
+{"beat": 6.7500, "pattern": "vault_slide", "width": 440.0, "height": 100.0}
+]}

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="MapModuleData" load_steps=6 format=3]
+[ext_resource type="Script" path="res://patterns/map_module_data.gd" id="1"]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="2"]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="3"]
+[sub_resource type="Resource" id="Phrase"]
+script = ExtResource("3")
+pattern_name = "SlidePlatform"
+display_name = "低身后登台，落回地面再铲再跳"
+template = "ACTION_PHRASE"
+difficulty = 1
+duration = 5.2
+length = 2080.0
+start_delay = 0.0
+instruction = "滑铲低梁后起跳落台；回落地面再压低，最后越刺"
+parameters = {"actions": [{"kind": "slide", "beat": 0.8}, {"kind": "platform", "beat": 1.8, "width_ratio": 4.0, "height_ratio": 0.4}, {"kind": "slide", "beat": 3.0}, {"kind": "spike", "beat": 3.8}, {"kind": "slide", "beat": 4.8}]}
+[sub_resource type="Resource" id="Section"]
+script = ExtResource("2")
+section_name = "SlidePlatformPhrase"
+display_name = "压低接登台与回落"
+stages = PackedStringArray("Vary：落脚高度变化")
+stage_entries = PackedInt32Array(1)
+entries = Array[Resource]([SubResource("Phrase")])
+[resource]
+script = ExtResource("1")
+module_id = "Slide_Platform_Phrase"
+display_name = "低身 · 登台 · 回落"
+theme = "MIXED"
+variant = "A"
+difficulty = 1
+sections = Array[PatternSectionData]([SubResource("Section")])

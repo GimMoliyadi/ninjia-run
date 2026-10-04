@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://components/map_module_chunk.gd" id="1"]
+[node name="SegmentPlatformDartMap" type="Node2D"]
+script = ExtResource("1")
+module_data_path = "res://patterns/library/Platform_Dart_Map_A.tres"
+[node name="Entry" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+[node name="Exit" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+[node name="Hint" type="Label" parent="."]
+text = "飞檐 · 镖桥：跨坑越低镖，落台压身，再接下一跳"

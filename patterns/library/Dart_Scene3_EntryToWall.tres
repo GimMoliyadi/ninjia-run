@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Scene3_EntryToWall"
+display_name = "中缝飞镖墙潮（P17）"
+template = "P17"
+difficulty = 2
+duration = 3.2
+length = 1700.0
+start_delay = 0.0
+instruction = "Introduce+Repeat：连续四堵成排飞镖墙形成同一波；前三堵保持中位安全口让玩家确认解法，第四堵只做轻微抬高"
+supports_mirror = true
+supports_reverse = true
+parameters = {"wall_count": 5, "wall_interval": 1.15, "gap_positions": [120.0, 120.0, 120.0, 145.0], "wall_speed": 195.0, "gap_size": 168.0, "spawn_distance": 360.0}
+tags = PackedStringArray("dart_wave", "wave_3", "introduce", "repeat")

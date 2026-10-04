@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "PlatformDart_Wave02_Bridge"
+display_name = "三台合招 · 分开读招再连起来"
+template = "PLATFORM_DART_WAVE"
+difficulty = 1
+duration = 5.4
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("PLATFORM_DARTS", "JUMP", "SLIDE")
+instruction = "第一台只需落稳后滑铲；跳过坑中低镖来到第二台，站稳再读下一坑；第三台把两招连起来：先跳过低镖，落稳后再铲台尾高镖。"
+parameters = {"speed": 180.0, "phrases": [
+{"beat": 0.6000, "pattern": "landing_slide", "width": 440.0, "height": 70.0},
+{"beat": 2.1125, "pattern": "vault", "width": 480.0, "height": 70.0},
+{"beat": 3.7250, "pattern": "vault_slide", "width": 440.0, "height": 70.0}
+]}

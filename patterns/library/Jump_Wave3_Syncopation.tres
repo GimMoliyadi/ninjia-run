@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "Jump_Wave3_Syncopation"
+display_name = "长长短短长"
+template = "P01"
+difficulty = 2
+duration = 0.1
+length = 200.0
+start_delay = 0.0
+parameters = {"positions": [320.0, 700.0, 1080.0, 1340.0, 1600.0, 1980.0], "spike_widths": [24.0, 24.0, 28.0, 28.0, 24.0, 32.0], "warning_distance": 320.0}
+instruction = "用长长短短长改变已学节奏"

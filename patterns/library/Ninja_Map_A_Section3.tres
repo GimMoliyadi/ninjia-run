@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PatternSectionData" load_steps=5 format=3]
+[ext_resource type="Script" path="res://patterns/pattern_section_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/NinjaMap_Wave08_Finale.tres" id="3"]
+[ext_resource type="Script" path="res://patterns/recovery_section.gd" id="RecoveryScript"]
+[sub_resource type="Resource" id="Recovery"]
+script = ExtResource("RecoveryScript")
+duration = 1.4
+coin_count = 3
+recovery_label = "破阵后 · 金币奖励"
+[resource]
+script = ExtResource("1")
+section_name = "Ninja_Map_A_Section3"
+display_name = "三 · 高低守位"
+stages = PackedStringArray("破阵 · 高低双回合", "破阵后 · 金币奖励")
+stage_entries = PackedInt32Array(1, 1)
+entries = Array[Resource]([ExtResource("3"), SubResource("Recovery")])

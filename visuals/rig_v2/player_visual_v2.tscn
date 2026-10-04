@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://visuals/rig_v2/player_visual_v2.gd" id="1_visual"]
+[ext_resource type="PackedScene" path="res://visuals/rig_v2/visual_root_v2.tscn" id="2_rig"]
+[ext_resource type="Script" path="res://visuals/rig_v2/ghost_spawner_v2.gd" id="3_ghost"]
+
+[node name="PlayerVisual_V2" type="Node2D"]
+script = ExtResource("1_visual")
+
+[node name="Orientation" type="Node2D" parent="."]
+
+[node name="ActionPivot" type="Node2D" parent="Orientation"]
+
+[node name="VisualRoot_V2" parent="Orientation/ActionPivot" instance=ExtResource("2_rig")]
+
+[node name="GhostSpawner_V2" type="Node2D" parent="."]
+script = ExtResource("3_ghost")

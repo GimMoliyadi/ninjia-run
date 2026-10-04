@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "JumpMap_Wave04_Steps"
+display_name = "地刺四 · 短长变化"
+template = "JUMP_WAVE"
+difficulty = 1
+duration = 1.9
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("JUMP", "Vary")
+instruction = "短刺后接长刺；前一跳的落点决定下一次起跳时机。"
+parameters = {"phrases": [
+{"beat": 0.34, "pattern": "single_spike", "width_ratio": 2.4},
+{"beat": 1.05, "pattern": "single_spike", "width_ratio": 3.0}
+]}

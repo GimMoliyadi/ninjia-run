@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "NinjaMap_Wave06_Crossfire"
+display_name = "交锋 · 台上台下"
+template = "NINJA_WAVE"
+difficulty = 3
+duration = 5.5
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("NINJA", "SPIKE", "Combine")
+instruction = "前后两名忍者守地面，中间一名守矮台。先读落脚高度，再选择连续跳越或借台面绕行，通过后还有地刺。"
+parameters = {"gates": [
+{"beat":1.75,"kind":"low","spawn_beat":0.1},
+{"beat":2.5,"kind":"high","spawn_beat":0.32,"platform_height":100.0},
+{"beat":3.25,"kind":"low","spawn_beat":0.54},
+{"beat":4.6,"kind":"spike"}
+]}

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Seg5_Slide"
+display_name = "第5段 · 站稳后，一铲过横排"
+template = "DART_WAVE"
+difficulty = 2
+duration = 1.138
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Introduce / Repeat")
+instruction = "高位抬线之后，三枚同高飞镖组成一条低身通道。先回到地面，再用一次滑铲通过整排，不需要逐枚连按，也不要把前面的高镖当成起跳信号。整排之后保留重新判断的距离，下一枚低镖不与它硬串成同一铲；高潮会再次用这条横排收尾。"
+parameters = {
+"speed": 185.0,
+"patterns": [
+{"kind": "SLIDE_ROW", "start_px": 57.5}
+]
+}

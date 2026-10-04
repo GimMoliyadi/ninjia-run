@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Scene5_Switch"
+display_name = "高潮换位飞镖墙（P17）"
+template = "P17"
+difficulty = 3
+duration = 2.8
+length = 1600.0
+start_delay = 0.0
+instruction = "Escalate：三连快镖后立即接三堵已学会的换位墙，中→中→高；前两道重复确认路线，最后一堵抬高迫使重新读位"
+supports_mirror = true
+supports_reverse = true
+parameters = {"wall_count": 3, "wall_interval": 0.9, "gap_positions": [120.0, 120.0, 165.0], "wall_speed": 225.0, "gap_size": 158.0, "spawn_distance": 560.0}
+tags = PackedStringArray("dart_wave", "wave_5", "escalate")

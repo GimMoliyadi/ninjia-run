@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave1_Pulse"
+display_name = "起手 · 单双镖"
+template = "DART_WAVE"
+difficulty = 1
+duration = 10.0
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Introduce / Repeat")
+instruction = "建立节奏，不是考反应。三种高度各读一次：贴地镖起跳（小跳就够）、胸口双镖滑铲、然后一条 SHORT 短上升斜线（36→82，轻轻一挑）。短斜线之后接一条 SHORT 下降斜线把玩家送回地面，最后用一组贴地双镖收尾。整段速度只有 120，间隔也留得宽 —— 斜线刻意用最矮的 SHORT 形，让玩家在看清楚「上升」和「下降」这两个概念之前，不需要处理高度跨度。"
+parameters = {
+"speed": 120.0,
+"patterns": [
+{"kind": "HINT", "count": 1},
+{"kind": "HINT", "count": 2, "layer": "SLIDE", "breath": 0.10},
+{"kind": "RISE", "shape": "SHORT", "breath": 0.00},
+{"kind": "FALL", "shape": "SHORT", "breath": 0.00},
+{"kind": "HINT", "count": 2, "breath": 0.00}
+]
+}

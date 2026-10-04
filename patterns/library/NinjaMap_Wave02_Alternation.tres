@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[resource]
+script = ExtResource("1")
+pattern_name = "NinjaMap_Wave02_Alternation"
+display_name = "追影 · 连续换位"
+template = "NINJA_WAVE"
+difficulty = 1
+duration = 8.5
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("NINJA", "STATIONARY", "Develop")
+instruction = "四名忍者依次站成一列，观察落地和挥刀时机，逐个越过。"
+parameters = {"gates": [
+{"beat":1.5,"kind":"low"},
+{"beat":3.2,"kind":"high"},
+{"beat":4.9,"kind":"low"},
+{"beat":6.6,"kind":"high"}
+]}

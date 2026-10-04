@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://components/chunk.gd" id="1_chunk"]
+[ext_resource type="PackedScene" path="res://scenes/Spike.tscn" id="2_spike"]
+[ext_resource type="PackedScene" path="res://scenes/Coin.tscn" id="3_coin"]
+
+[ext_resource type="PackedScene" path="res://scenes/SlideBeam.tscn" id="4_beam"]
+[ext_resource type="Script" path="res://components/jump_coin_arc.gd" id="5_jump_arc"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(1600, 80)
+
+[node name="SegmentTripleJump" type="Node2D"]
+script = ExtResource("1_chunk")
+
+[node name="Entry" type="Marker2D" parent="."]
+position = Vector2(0, 460)
+
+[node name="Exit" type="Marker2D" parent="."]
+position = Vector2(1600, 460)
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 460, 1600, 460, 1600, 540, 0, 540)
+color = Color(0.152941, 0.235294, 0.172549, 1)
+
+[node name="GroundLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 460, 1600, 460)
+width = 8.0
+default_color = Color(0.145098, 0.145098, 0.180392, 1)
+
+[node name="GroundBody" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundBody"]
+position = Vector2(800, 500)
+shape = SubResource("GroundShape")
+
+[node name="SpikeA" parent="." instance=ExtResource("2_spike")]
+position = Vector2(400, 460)
+
+[node name="SpikeB" parent="." instance=ExtResource("2_spike")]
+position = Vector2(760, 460)
+
+[node name="SpikeC" parent="." instance=ExtResource("2_spike")]
+position = Vector2(1120, 460)
+
+[node name="Coin0" parent="." instance=ExtResource("3_coin")]
+position = Vector2(300, 395)
+
+[node name="Coin1" parent="." instance=ExtResource("3_coin")]
+position = Vector2(400, 325)
+
+[node name="Coin2" parent="." instance=ExtResource("3_coin")]
+position = Vector2(500, 395)
+
+[node name="Coin3" parent="." instance=ExtResource("3_coin")]
+position = Vector2(660, 395)
+
+[node name="Coin4" parent="." instance=ExtResource("3_coin")]
+position = Vector2(760, 325)
+
+[node name="Coin5" parent="." instance=ExtResource("3_coin")]
+position = Vector2(860, 395)
+
+[node name="Coin6" parent="." instance=ExtResource("3_coin")]
+position = Vector2(1020, 395)
+
+[node name="Coin7" parent="." instance=ExtResource("3_coin")]
+position = Vector2(1120, 325)
+
+[node name="Coin8" parent="." instance=ExtResource("3_coin")]
+position = Vector2(1220, 395)
+
+[node name="JumpCoinArcA" type="Node" parent="."]
+script = ExtResource("5_jump_arc")
+obstacle_paths = Array[NodePath]([NodePath("../SpikeA")])
+coin_paths = Array[NodePath]([NodePath("../Coin0"), NodePath("../Coin1"), NodePath("../Coin2")])
+
+[node name="JumpCoinArcB" type="Node" parent="."]
+script = ExtResource("5_jump_arc")
+obstacle_paths = Array[NodePath]([NodePath("../SpikeB")])
+coin_paths = Array[NodePath]([NodePath("../Coin3"), NodePath("../Coin4"), NodePath("../Coin5")])
+
+[node name="JumpCoinArcC" type="Node" parent="."]
+script = ExtResource("5_jump_arc")
+obstacle_paths = Array[NodePath]([NodePath("../SpikeC")])
+coin_paths = Array[NodePath]([NodePath("../Coin6"), NodePath("../Coin7"), NodePath("../Coin8")])
+
+[node name="Hint" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 220.0
+theme_override_colors/font_color = Color(0.15, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 24
+text = "08  进阶 · 三连跳，落地再起跳"

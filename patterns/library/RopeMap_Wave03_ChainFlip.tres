@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "RopeMap_Wave03_ChainFlip"
+display_name = "短句 · 上—下—上"
+template = "ROPE_WAVE"
+difficulty = 1
+duration = 4.7
+start_delay = 0.0
+supports_speed = false
+tags = PackedStringArray("ROPE", "Escalate")
+instruction = "把刚学会的接力延长一拍：下侧来镖时先留上绳，上侧来镖时翻下，最后下侧来镖时翻回上绳。每组仍只有两枚；只在前一组末枚通过后的完整空白里换侧，不在镖串内部抢翻。"
+parameters = {"gates": [
+{"beat":0.6,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4},
+{"beat":2.0,"kind":"darts","safe_side":1,"count":2,"rows":1,"spacing":0.4},
+{"beat":3.4,"kind":"darts","safe_side":0,"count":2,"rows":1,"spacing":0.4}
+]}

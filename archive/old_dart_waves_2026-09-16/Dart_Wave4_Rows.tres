@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+pattern_name = "Dart_Wave4_Rows"
+display_name = "延迟二跳"
+template = "DART_WAVE"
+difficulty = 1
+duration = 13.5
+start_delay = 0.0
+tags = PackedStringArray("DARTS", "Introduce / Repeat")
+instruction = "这一段把「延迟二段跳」教透，两次之间用不同形状的斜线分隔，让两次是两道不同的题。第一次：第一枚贴地镖只需一段跳，越过之后开始下降，中位镖正好落在下降轨迹上，紧跟着又是一枚贴地镖 —— 必须在下降途中二段跳重新抬升。之后接一条 TALL 下降斜线（200→152→96→36），从高位一路还回地面。第二次复习同样的判断，末尾用胸口双镖复习滑铲，把「滑铲层」和「贴地层」的差别再确认一次。"
+parameters = {
+"speed": 150.0,
+"patterns": [
+{"kind": "HINT", "count": 1},
+{"kind": "DELAYED", "breath": 0.00},
+{"kind": "FALL", "shape": "TALL", "breath": 0.00},
+{"kind": "DELAYED", "breath": 0.00},
+{"kind": "HINT", "count": 2, "layer": "SLIDE", "breath": 0.08}
+]
+}

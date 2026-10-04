@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ObstaclePatternData" load_steps=3 format=3]
+[ext_resource type="Script" path="res://patterns/obstacle_pattern_data.gd" id="1"]
+[ext_resource type="Resource" path="res://patterns/library/P14_MiddleGap.tres" id="2"]
+[resource]
+script = ExtResource("1")
+pattern_name = "P28_RhythmBurst"
+display_name = "连发飞镖接飞镖墙"
+template = "P28"
+instruction = "快 → 快 → 空白 → 安全口墙；利用空白恢复动作"
+parameters = {"first_interval": 0.35, "pause_duration": 1.4, "speed": 240.0, "spawn_distance": 650.0}
+final_pattern = ExtResource("2")
